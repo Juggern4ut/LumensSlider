@@ -1,0 +1,10 @@
+.lumens__track{
+  overflow: hidden;
+  transition: all 200ms ease-out;
+  transform: translate3d(0, 0, 0);
+}
+
+.lumens__slide{
+  float: left;
+  padding: 10px;
+}
