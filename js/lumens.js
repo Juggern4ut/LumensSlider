@@ -17,11 +17,14 @@ class Lumens {
     this.updateSettings(options)
     this.initialSettings = options
     this.currentBreakpointIndex = undefined
+    this.oldBreakpointIndex = undefined
+    this.updateSettingsByBreakpoint()
 
     this.slider.style.overflow = "hidden"
     this.slider.style.height = "0px"
 
     this.changeCallback = () => {}
+    this.resizeCallback = () => {}
 
     //CALCULATIONS
     this.calculateWidths()
@@ -51,7 +54,7 @@ class Lumens {
       this.calculateWidths()
       this.reinitWidths()
       if (this.getCurrentPage() > this.slideAmount - this.slidesPerPage) {
-        this.gotoPage(this.slideAmount - this.slidesPerPage)
+        this.gotoPage(this.slideAmount - this.slidesPerPage, false)
       }
     })
   }
@@ -68,6 +71,11 @@ class Lumens {
       if (window.innerWidth < breakpoint.breakpoint) {
         this.currentBreakpointIndex = i
       }
+    }
+
+    if(this.currentBreakpointIndex != this.oldBreakpointIndex){
+      this.oldBreakpointIndex = this.currentBreakpointIndex
+      this.resizeCallback()
     }
 
     if (this.currentBreakpointIndex !== undefined) {
@@ -130,17 +138,14 @@ class Lumens {
     this.slides = this.track.children
   }
 
-  getData() {
-    console.log(this)
-  }
-
   /**
    * Scrolls the slider to a certain page. If page is undefined
    * it will scroll to the nearest page of the current offset.
    * (This is what happens when you release the mouse button while dragging)
    * @param {Number} page The page to which the slider should scroll
    */
-  gotoPage(page) {
+  gotoPage(page, triggerChange) {
+    triggerChange = triggerChange === undefined ? true : triggerChange
     page = page === undefined ? this.getCurrentPage() : page
 
     page = page < 0 ? 0 : page
@@ -149,7 +154,9 @@ class Lumens {
     this.setTransform(offset)
     this.xOffset = offset
     this.currentPage = page
-    this.changeCallback()
+    if(triggerChange){
+      this.changeCallback()
+    }
   }
 
   /**
@@ -170,6 +177,10 @@ class Lumens {
 
   changed(callback) {
     this.changeCallback = callback
+  }
+
+  resize(callback){
+    this.resizeCallback = callback
   }
 
   /**
@@ -239,7 +250,7 @@ class Lumens {
     })
 
     this.track.style.transition = "all 0ms ease-out"
-    this.gotoPage()
+    this.gotoPage(undefined, false)
   }
 
   /**

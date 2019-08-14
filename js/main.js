@@ -34,6 +34,10 @@ window.addEventListener("load", () => {
     console.log("changed")
   })
 
+  window.a.resize(() => {
+    console.log("Breakpoint changed")
+  })
+
   let slides = document.querySelectorAll(".slide img")
   Array.from(slides).forEach(slide => {
     slide.addEventListener("click", () => {
