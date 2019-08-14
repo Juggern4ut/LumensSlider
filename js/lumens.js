@@ -6,7 +6,7 @@ class Lumens {
 
     //Prevent JS from breaking if there is no element found with the given selector
     if (!this.slider) {
-      console.warn("Lumens: No element found using the given selector: " + selector)
+      console.warn("%cLumens: No element found using the given selector: " + selector, "color:#000; font-weight: bold; background-color:#ffeb3b; padding: 5px 10px")
       return false
     }
 
@@ -22,9 +22,6 @@ class Lumens {
 
     this.slider.style.overflow = "hidden"
     this.slider.style.height = "0px"
-
-    this.changeCallback = () => {}
-    this.resizeCallback = () => {}
 
     //CALCULATIONS
     this.calculateWidths()
@@ -164,6 +161,7 @@ class Lumens {
    * @returns {void}
    */
   gotoNext() {
+    this.track.style.transition = "all 200ms ease-out"
     this.gotoPage(this.currentPage + 1)
   }
 
@@ -172,6 +170,7 @@ class Lumens {
    * @returns {void}
    */
   gotoPrev() {
+    this.track.style.transition = "all 200ms ease-out"
     this.gotoPage(this.currentPage - 1)
   }
 
@@ -208,6 +207,8 @@ class Lumens {
     this.loop = false
     this.preventClickDistance = 100
     this.responsive = []
+    this.changeCallback = () => {}
+    this.resizeCallback = () => {}
   }
 
   /**
