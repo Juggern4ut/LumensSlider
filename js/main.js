@@ -22,6 +22,18 @@ window.addEventListener("load", () => {
     ]
   })
 
+  document.getElementById("prev").addEventListener("click", () => {
+    window.a.gotoPrev()
+  })
+
+  document.getElementById("next").addEventListener("click", () => {
+    window.a.gotoNext()
+  })
+
+  window.a.changed(() => {
+    console.log("changed")
+  })
+
   let slides = document.querySelectorAll(".slide img")
   Array.from(slides).forEach(slide => {
     slide.addEventListener("click", () => {

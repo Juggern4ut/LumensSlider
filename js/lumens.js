@@ -3,7 +3,7 @@
 class Lumens {
   constructor(selector, options) {
     this.slider = document.querySelector(selector)
-    
+
     //Prevent JS from breaking if there is no element found with the given selector
     if (!this.slider) {
       console.warn("Lumens: No element found using the given selector: " + selector)
@@ -20,6 +20,8 @@ class Lumens {
 
     this.slider.style.overflow = "hidden"
     this.slider.style.height = "0px"
+
+    this.changeCallback = () => {}
 
     //CALCULATIONS
     this.calculateWidths()
@@ -133,14 +135,41 @@ class Lumens {
   }
 
   /**
-   * Scrolls the slider to a certain page.
+   * Scrolls the slider to a certain page. If page is undefined
+   * it will scroll to the nearest page of the current offset.
+   * (This is what happens when you release the mouse button while dragging)
    * @param {Number} page The page to which the slider should scroll
    */
   gotoPage(page) {
     page = page === undefined ? this.getCurrentPage() : page
+
+    page = page < 0 ? 0 : page
+    page = page > this.slideAmount - this.slidesPerPage ? this.slideAmount - this.slidesPerPage : page
     let offset = page * this.slideWidth * -1
     this.setTransform(offset)
     this.xOffset = offset
+    this.currentPage = page
+    this.changeCallback()
+  }
+
+  /**
+   * Will go to the next page
+   * @returns {void}
+   */
+  gotoNext() {
+    this.gotoPage(this.currentPage + 1)
+  }
+
+  /**
+   * Will go to the previous page
+   * @returns {void}
+   */
+  gotoPrev() {
+    this.gotoPage(this.currentPage - 1)
+  }
+
+  changed(callback) {
+    this.changeCallback = callback
   }
 
   /**
