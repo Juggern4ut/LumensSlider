@@ -21,4 +21,11 @@ window.addEventListener("load", () => {
       }
     ]
   })
+
+  let slides = document.querySelectorAll(".slide img")
+  Array.from(slides).forEach(slide => {
+    slide.addEventListener("click", () => {
+      window.location.href = "https://placekitten.com"
+    })
+  })
 })

@@ -32,6 +32,7 @@ class Lumens {
 
     this.initializeDragging()
     this.addResizeEventListener()
+    this.preventClickOnDrag()
     this.slider.style.height = "auto"
   }
 
@@ -40,7 +41,7 @@ class Lumens {
       this.updateSettingsByBreakpoint()
       this.calculateWidths()
       this.reinitWidths()
-      if(this.getCurrentPage() > this.slideAmount - this.slidesPerPage){
+      if (this.getCurrentPage() > this.slideAmount - this.slidesPerPage) {
         this.gotoPage(this.slideAmount - this.slidesPerPage)
       }
     })
@@ -101,6 +102,7 @@ class Lumens {
       }
 
       this.xDragDelta = e.pageX - this.xDragStart
+      console.log(this.xDragDelta)
       this.setTransform(this.xOffset + this.xDragDelta)
     })
   }
@@ -158,6 +160,7 @@ class Lumens {
     this.multipleDrag = true
     this.threshold = 20
     this.loop = false
+    this.preventClickDistance = 100
     this.responsive = []
   }
 
@@ -202,6 +205,25 @@ class Lumens {
 
     this.track.style.transition = "all 0ms ease-out"
     this.gotoPage()
+  }
+
+  /**
+   * Makes sure all click events on slides are being 
+   * prevented if the user is dragging the carousel
+   * @returns {void}
+   */
+  preventClickOnDrag() {
+    document.addEventListener(
+      "click",
+      e => {
+        if (Math.abs(this.xDragDelta) > this.preventClickDistance) {
+          e.stopPropagation()
+          e.preventDefault()
+          this.xDragDelta = 0
+        }
+      },
+      true
+    )
   }
 }
 
