@@ -3,6 +3,13 @@
 class Lumens {
   constructor(selector, options) {
     this.slider = document.querySelector(selector)
+    
+    //Prevent JS from breaking if there is no element found with the given selector
+    if (!this.slider) {
+      console.warn("Lumens: No element found using the given selector: " + selector)
+      return false
+    }
+
     this.slideAmount = this.slider.children.length
 
     //OPTIONS
@@ -102,7 +109,6 @@ class Lumens {
       }
 
       this.xDragDelta = e.pageX - this.xDragStart
-      console.log(this.xDragDelta)
       this.setTransform(this.xOffset + this.xDragDelta)
     })
   }
@@ -208,7 +214,7 @@ class Lumens {
   }
 
   /**
-   * Makes sure all click events on slides are being 
+   * Makes sure all click events on slides are being
    * prevented if the user is dragging the carousel
    * @returns {void}
    */
