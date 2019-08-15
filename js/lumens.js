@@ -1,12 +1,10 @@
-//import "./lumslide.css"
-
 class Lumens {
   constructor(selector, options) {
     this.slider = document.querySelector(selector)
 
     //Prevent JS from breaking if there is no element found with the given selector
     if (!this.slider) {
-      console.warn("%cLumens: No element found using the given selector: " + selector, "color:#000; font-weight: bold; background-color:#ffeb3b; padding: 5px 10px")
+      console.warn("Lumens: No element found using the given selector: " + selector)
       return false
     }
 
@@ -36,6 +34,9 @@ class Lumens {
     this.track = document.createElement("div")
     this.track.className = "lumens__track"
     this.track.style.width = this.sliderWidth + "px"
+    this.track.style.overflow = "hidden"
+    this.track.style.transform = "translate3d(0, 0, 0)"
+    this.track.style.transition =  "all 200ms ease-out";
     this.slider.append(this.track)
     this.setupSlides()
 
@@ -45,6 +46,11 @@ class Lumens {
     this.slider.style.height = "auto"
   }
 
+  /**
+   * Will set the resize event listener and set the 
+   * widths for all elements again
+   * @returns {void}
+   */
   addResizeEventListener() {
     window.addEventListener("resize", () => {
       this.updateSettingsByBreakpoint()
@@ -83,6 +89,11 @@ class Lumens {
     }
   }
 
+  /**
+   * Initializes the events that allow the user
+   * to drag the carousel to change slides.
+   * @returns {void}
+   */
   initializeDragging() {
     this.slider.addEventListener("mousedown", e => {
       this.isDragging = true
@@ -120,16 +131,26 @@ class Lumens {
     })
   }
 
+  /**
+   * Sets the translate3d-rule for the track to the given amount
+   * @param {number} value The amount in Pixel the transfrom should be set
+   */
   setTransform(value) {
     this.track.style.transform = `translate3d(${value}px, 0, 0)`
   }
 
+  /**
+   * Will configure the initial state of the slides
+   * and place them inside the track-element.
+   * @returns {void}
+   */
   setupSlides() {
     for (let i = 0; i < this.slideAmount; i++) {
       const slide = this.slider.children[0]
       slide.classList.add("lumens__slide")
       slide.style.width = this.slideWidth - this.margin * 2 + "px"
       slide.style.margin = "0 " + this.margin + "px"
+      slide.style.float = "left"
       this.track.append(slide)
     }
     this.slides = this.track.children
@@ -174,10 +195,18 @@ class Lumens {
     this.gotoPage(this.currentPage - 1)
   }
 
+  /**
+   * Sets the callback for changing slides
+   * @param {function} callback Will be called when the slides change
+   */
   changed(callback) {
     this.changeCallback = callback
   }
 
+  /**
+   * Sets the callback for changing breakpoints
+   * @param {function} callback This will be called, when another breakpoint is reached
+   */
   resize(callback){
     this.resizeCallback = callback
   }
