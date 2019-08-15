@@ -36,7 +36,7 @@ class Lumens {
     this.track.style.width = this.sliderWidth + "px"
     this.track.style.overflow = "hidden"
     this.track.style.transform = "translate3d(0, 0, 0)"
-    this.track.style.transition =  "all 200ms ease-out";
+    this.track.style.transition = `all ${this.duration}ms ${this.easing}`
     this.slider.append(this.track)
     this.setupSlides()
 
@@ -97,7 +97,7 @@ class Lumens {
   initializeDragging() {
     this.slider.addEventListener("mousedown", e => {
       this.isDragging = true
-      this.track.style.transition = "all 0ms ease-out"
+      this.track.style.transition = `all 0ms ${this.easing}`
       this.xDragStart = e.pageX
     })
 
@@ -106,7 +106,7 @@ class Lumens {
         return false
       }
 
-      this.track.style.transition = "all 200ms ease-out"
+      this.track.style.transition = `all ${this.duration}ms ${this.easing}`
       this.xOffset += this.xDragDelta
 
       if (this.xOffset > 0) {
@@ -182,7 +182,7 @@ class Lumens {
    * @returns {void}
    */
   gotoNext() {
-    this.track.style.transition = "all 200ms ease-out"
+    this.track.style.transition = `all ${this.duration}ms ${this.easing}`
     this.gotoPage(this.currentPage + 1)
   }
 
@@ -191,7 +191,7 @@ class Lumens {
    * @returns {void}
    */
   gotoPrev() {
-    this.track.style.transition = "all 200ms ease-out"
+    this.track.style.transition = `all ${this.duration}ms ${this.easing}`
     this.gotoPage(this.currentPage - 1)
   }
 
@@ -279,7 +279,7 @@ class Lumens {
       slide.style.margin = `0 ${this.margin}px`
     })
 
-    this.track.style.transition = "all 0ms ease-out"
+    this.track.style.transition = `all 0ms ${this.easing}`
     this.gotoPage(undefined, false)
   }
 
