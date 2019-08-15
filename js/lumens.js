@@ -36,13 +36,14 @@ class Lumens {
     this.track.style.width = this.sliderWidth + "px"
     this.track.style.overflow = "hidden"
     this.track.style.transform = "translate3d(0, 0, 0)"
-    this.track.style.transition = `all ${this.duration}ms ${this.easing}`
+    this.enableTransition()
     this.slider.append(this.track)
     this.setupSlides()
 
     this.initializeDragging()
     this.addResizeEventListener()
     this.preventClickOnDrag()
+    this.initAutoplay()
     this.slider.style.height = "auto"
   }
 
@@ -60,6 +61,25 @@ class Lumens {
         this.gotoPage(this.slideAmount - this.slidesPerPage, false)
       }
     })
+  }
+
+  /**
+   * Initializes an autoplay depending on the settings
+   * @returns {void}
+   */
+  initAutoplay() {
+    clearInterval(this.autoplayFunction)
+    this.autoplayFunction = undefined
+
+    if (!this.autoplay) {
+      return false
+    }
+
+    this.autoplayFunction = setInterval(() => {
+      var page = this.currentPage + 1 > this.slideAmount - this.slidesPerPage ? 0 : this.currentPage + 1
+      this.enableTransition()
+      this.gotoPage(page)
+    }, this.autoplay)
   }
 
   /**
@@ -106,7 +126,7 @@ class Lumens {
         return false
       }
 
-      this.track.style.transition = `all ${this.duration}ms ${this.easing}`
+      this.enableTransition()
       this.xOffset += this.xDragDelta
 
       var currentPage = this.currentPage
@@ -165,6 +185,7 @@ class Lumens {
    * it will scroll to the nearest page of the current offset.
    * (This is what happens when you release the mouse button while dragging)
    * @param {Number} page The page to which the slider should scroll
+   * @param {Boolean} triggerChange If set to false, the change-callback will not be called
    */
   gotoPage(page, triggerChange) {
     triggerChange = triggerChange === undefined ? true : triggerChange
@@ -190,7 +211,7 @@ class Lumens {
    * @returns {void}
    */
   gotoNext() {
-    this.track.style.transition = `all ${this.duration}ms ${this.easing}`
+    this.enableTransition()
     this.gotoPage(this.currentPage + 1)
   }
 
@@ -199,7 +220,7 @@ class Lumens {
    * @returns {void}
    */
   gotoPrev() {
-    this.track.style.transition = `all ${this.duration}ms ${this.easing}`
+    this.enableTransition()
     this.gotoPage(this.currentPage - 1)
   }
 
@@ -238,6 +259,8 @@ class Lumens {
     this.duration = 200
     this.easing = "ease-out"
     this.startIndex = 0
+    this.autoplay = false
+    this.autoplayFunction = undefined
     this.draggable = true
     this.multipleDrag = true
     this.threshold = 20
@@ -287,7 +310,7 @@ class Lumens {
       slide.style.margin = `0 ${this.margin}px`
     })
 
-    this.track.style.transition = `all 0ms ${this.easing}`
+    this.disableTransition()
     this.gotoPage(undefined, false)
   }
 
@@ -308,6 +331,22 @@ class Lumens {
       },
       true
     )
+  }
+
+  /**
+   * Enables the transition on the track-element
+   * @returns {void}
+   */
+  enableTransition() {
+    this.track.style.transition = `all ${this.duration}ms ${this.easing}`
+  }
+
+  /**
+   * Disables the transition on the track-element
+   * @returns {void}
+   */
+  disableTransition() {
+    this.track.style.transition = `all 0ms ${this.easing}`
   }
 }
 

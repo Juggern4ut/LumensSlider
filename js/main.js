@@ -4,6 +4,7 @@ window.addEventListener("load", () => {
   window.a = new Lumens(".productslider", {
     slidesPerPage: 4,
     margin: 10,
+    autoplay: 3000,
     responsive: [
       {
         breakpoint: 1024,
