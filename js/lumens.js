@@ -47,7 +47,7 @@ class Lumens {
   }
 
   /**
-   * Will set the resize event listener and set the 
+   * Will set the resize event listener and set the
    * widths for all elements again
    * @returns {void}
    */
@@ -76,7 +76,7 @@ class Lumens {
       }
     }
 
-    if(this.currentBreakpointIndex != this.oldBreakpointIndex){
+    if (this.currentBreakpointIndex != this.oldBreakpointIndex) {
       this.oldBreakpointIndex = this.currentBreakpointIndex
       this.resizeCallback()
     }
@@ -109,10 +109,14 @@ class Lumens {
       this.track.style.transition = `all ${this.duration}ms ${this.easing}`
       this.xOffset += this.xDragDelta
 
+      var currentPage = this.currentPage
+
       if (this.xOffset > 0) {
-        this.gotoPage(0)
+        var changing = currentPage != 0
+        this.gotoPage(0, changing)
       } else if (Math.abs(this.xOffset) + this.slidesPerPage * (this.slideWidth + this.margin * 2) >= this.sliderWidth) {
-        this.gotoPage(this.slideAmount - this.slidesPerPage)
+        var changing = currentPage < this.slideAmount - this.slidesPerPage
+        this.gotoPage(this.slideAmount - this.slidesPerPage, changing)
       } else {
         this.gotoPage()
       }
@@ -166,13 +170,17 @@ class Lumens {
     triggerChange = triggerChange === undefined ? true : triggerChange
     page = page === undefined ? this.getCurrentPage() : page
 
+    if (page < 0 || page > this.slideAmount - this.slidesPerPage) {
+      triggerChange = false
+    }
+
     page = page < 0 ? 0 : page
     page = page > this.slideAmount - this.slidesPerPage ? this.slideAmount - this.slidesPerPage : page
     let offset = page * this.slideWidth * -1
     this.setTransform(offset)
     this.xOffset = offset
     this.currentPage = page
-    if(triggerChange){
+    if (triggerChange) {
       this.changeCallback()
     }
   }
@@ -207,7 +215,7 @@ class Lumens {
    * Sets the callback for changing breakpoints
    * @param {function} callback This will be called, when another breakpoint is reached
    */
-  resize(callback){
+  resize(callback) {
     this.resizeCallback = callback
   }
 
