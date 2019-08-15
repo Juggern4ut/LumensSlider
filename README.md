@@ -23,7 +23,7 @@ Using Lumens is as simple as it can get. Just import dist/main.js into your proj
 
 Generate a HTML markup that looks like this:
 
-```
+```HTML
 <div id="lumens">
   <div>My Slide 1</div>
   <div>My Slide 2</div>
@@ -35,13 +35,13 @@ Generate a HTML markup that looks like this:
 
 Now all you have to do is initialize the slider like so:
 
-```
+```JS
 var mySlider = new Lumens("#lumens")
 ```
 
 That's the most simple setup using all the default options. If you want to pass your own options, you can set them using an object as the second argument.
 
-```
+```JS
 var mySliderWithOptions = new Lumens("#lumens", {
   slidesPerPage: 3,
   margin: 20
