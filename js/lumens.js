@@ -121,7 +121,8 @@ class Lumens {
       if (!this.draggable) {
         return false
       }
-
+      
+      e.preventDefault()
       clearInterval(this.autoplayFunction)
       this.isDragging = true
       this.track.style.transition = `all 0ms ${this.easing}`
@@ -166,6 +167,7 @@ class Lumens {
   /**
    * Sets the translate3d-rule for the track to the given amount
    * @param {number} value The amount in Pixel the transfrom should be set
+   * @returns {void}
    */
   setTransform(value) {
     this.track.style.msTransform = `translate3d(${value}px, 0, 0)`
@@ -292,7 +294,7 @@ class Lumens {
   }
 
   /**
-   * Sets default settings and overrites it with custom ones.
+   * Overrites default settings with custom ones.
    * @param {Object} options - Optional settings object.
    * @returns {void}
    */
