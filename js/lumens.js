@@ -1,14 +1,19 @@
 class Lumens {
-  constructor(selector, options) {
-    
+  constructor(selector, options, showWarnings) {
+
     this.slider = typeof selector === "string" ? document.querySelector(selector) : selector
 
     //Prevent JS from breaking if there is no element found with the given selector
     if (!this.slider) {
-      console.warn("Lumens: No element found using the given selector: " + selector)
+
+      if(showWarnings){
+        console.warn("Lumens: No element found using the given selector: " + selector)
+      }
+
       return false
     }
 
+    this.showWarnings = showWarnings
     this.slideAmount = this.slider.children.length
 
     //OPTIONS
