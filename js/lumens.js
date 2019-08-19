@@ -24,20 +24,9 @@ class Lumens {
     //CALCULATIONS
     this.calculateWidths()
 
-    this.isDragging = false
-    this.xDragStart = 0
-    this.xDragDelta = 0
-    this.xOffset = 0
-    this.currentPage = 0
-
     //Create and fill track
-    this.track = document.createElement("div")
-    this.track.className = "lumens__track"
-    this.track.style.width = this.sliderWidth + "px"
-    this.track.style.overflow = "hidden"
-    this.track.style.transform = "translate3d(0, 0, 0)"
+    this.createAndAddTrack()
     this.enableTransition()
-    this.slider.append(this.track)
     this.setupSlides()
 
     this.initializeDragging()
@@ -45,6 +34,19 @@ class Lumens {
     this.preventClickOnDrag()
     this.initAutoplay()
     this.slider.style.height = "auto"
+  }
+
+  /**
+   * Creates the track element and formats it correctly
+   * @returns {void}
+   */
+  createAndAddTrack() {
+    this.track = document.createElement("div")
+    this.track.className = "lumens__track"
+    this.track.style.width = this.sliderWidth + "px"
+    this.track.style.overflow = "hidden"
+    this.track.style.transform = "translate3d(0, 0, 0)"
+    this.slider.append(this.track)
   }
 
   /**
@@ -166,6 +168,10 @@ class Lumens {
    * @param {number} value The amount in Pixel the transfrom should be set
    */
   setTransform(value) {
+    this.track.style.msTransform = `translate3d(${value}px, 0, 0)`
+    this.track.style.webkitTransform = `translate3d(${value}px, 0, 0)`
+    this.track.style.MozTransform = `translate3d(${value}px, 0, 0)`
+    this.track.style.OTransform = `translate3d(${value}px, 0, 0)`
     this.track.style.transform = `translate3d(${value}px, 0, 0)`
   }
 
@@ -177,7 +183,7 @@ class Lumens {
   setupSlides() {
     for (let i = 0; i < this.slideAmount; i++) {
       const slide = this.slider.children[0]
-      slide.classList.add("lumens__slide")
+      slide.className += " lumens__slide"
       slide.style.width = this.slideWidth - this.margin * 2 + "px"
       slide.style.margin = "0 " + this.margin + "px"
       slide.style.float = "left"
@@ -277,6 +283,12 @@ class Lumens {
     this.responsive = []
     this.changeCallback = () => {}
     this.resizeCallback = () => {}
+
+    this.isDragging = false
+    this.xDragStart = 0
+    this.xDragDelta = 0
+    this.xOffset = 0
+    this.currentPage = 0
   }
 
   /**
