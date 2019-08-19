@@ -1,6 +1,7 @@
 class Lumens {
   constructor(selector, options) {
-    this.slider = document.querySelector(selector)
+    
+    this.slider = typeof selector === "string" ? document.querySelector(selector) : selector
 
     //Prevent JS from breaking if there is no element found with the given selector
     if (!this.slider) {
