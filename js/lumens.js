@@ -1,15 +1,10 @@
 class Lumens {
   constructor(selector, options, showWarnings) {
-
     this.slider = typeof selector === "string" ? document.querySelector(selector) : selector
 
     //Prevent JS from breaking if there is no element found with the given selector
     if (!this.slider) {
-
-      if(showWarnings){
-        console.warn("Lumens: No element found using the given selector: " + selector)
-      }
-
+      this.warn("No element found using the given selector: " + selector)
       return false
     }
 
@@ -125,9 +120,15 @@ class Lumens {
   initializeDragging() {
     this.slider.addEventListener("mousedown", e => {
       if (!this.draggable) {
+        this.warn("Dragging is disabled")
         return false
       }
-      
+
+      if (e.button !== this.mouseButton) {
+        this.warn("Dragging is not possible with this mouse-button")
+        return false
+      }
+
       e.preventDefault()
       clearInterval(this.autoplayFunction)
       this.isDragging = true
@@ -287,8 +288,10 @@ class Lumens {
     this.multipleDrag = true
     this.threshold = 20
     this.loop = false
+    this.mouseButton = 0
     this.preventClickDistance = 100
     this.responsive = []
+    this.noOuterMargin = false
     this.changeCallback = () => {}
     this.resizeCallback = () => {}
 
@@ -318,9 +321,16 @@ class Lumens {
    * @returns {void}
    */
   calculateWidths() {
-    this.sliderVisibleWidth = this.slider.offsetWidth
+    this.sliderPadding = parseInt(window.getComputedStyle(this.slider, null).getPropertyValue("padding-left"))
+    this.sliderVisibleWidth = this.slider.offsetWidth - this.sliderPadding * 2
     this.slideWidth = this.sliderVisibleWidth / this.slidesPerPage
     this.sliderWidth = this.slideWidth * this.slideAmount
+
+    if (this.noOuterMargin) {
+      this.sliderVisibleWidth += this.margin * 2
+      this.slider.style.position = "relative"
+      this.slider.style.right = this.margin + "px"
+    }
   }
 
   /**
@@ -375,6 +385,18 @@ class Lumens {
    */
   disableTransition() {
     this.track.style.transition = `all 0ms ${this.easing}`
+  }
+
+  /**
+   * Will output a warning in the console as long as
+   * warning messages are enabled manually.
+   * @param {String} warning The message the user should be warned about
+   * @returns {void}
+   */
+  warn(warning) {
+    if (this.showWarnings) {
+      console.warn("Lumens: " + warning)
+    }
   }
 }
 

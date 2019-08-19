@@ -29,6 +29,8 @@ window.addEventListener("load", () => {
     slidesPerPage: 4,
     margin: 10,
     autoplay: 3000,
+    noOuterMargin: false,
+    showWarnings: true,
     draggable: true,
     duration: 300,
     responsive: [

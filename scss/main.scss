@@ -11,6 +11,8 @@ body {
   margin: 0 auto;
   width: calc(100% - 100px);
   position: relative;
+  border: 1px solid #555;
+  padding: 10px;
 
   .slide {
     border: 1px solid #dedede;
