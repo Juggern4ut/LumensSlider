@@ -215,8 +215,8 @@ class Lumens {
       triggerChange = false
     }
 
-    page = page < 0 ? 0 : page
     page = page > this.slideAmount - this.slidesPerPage ? this.slideAmount - this.slidesPerPage : page
+    page = page < 0 ? 0 : page
     let offset = page * this.slideWidth * -1
     this.setTransform(offset)
     this.xOffset = offset
