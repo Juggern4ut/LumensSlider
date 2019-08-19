@@ -116,6 +116,10 @@ class Lumens {
    */
   initializeDragging() {
     this.slider.addEventListener("mousedown", e => {
+      if (!this.draggable) {
+        return false
+      }
+
       this.isDragging = true
       this.track.style.transition = `all 0ms ${this.easing}`
       this.xDragStart = e.pageX
@@ -212,7 +216,8 @@ class Lumens {
    */
   gotoNext() {
     this.enableTransition()
-    this.gotoPage(this.currentPage + 1)
+    let page = this.currentPage >= this.slideAmount - this.slidesPerPage ? 0 : this.currentPage + 1
+    this.gotoPage(page)
   }
 
   /**
@@ -221,7 +226,8 @@ class Lumens {
    */
   gotoPrev() {
     this.enableTransition()
-    this.gotoPage(this.currentPage - 1)
+    let page = this.currentPage <= 0 ? this.slideAmount : this.currentPage - 1
+    this.gotoPage(page)
   }
 
   /**

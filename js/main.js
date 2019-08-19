@@ -5,6 +5,8 @@ window.addEventListener("load", () => {
     slidesPerPage: 4,
     margin: 10,
     autoplay: 3000,
+    draggable: false,
+    duration: 300,
     responsive: [
       {
         breakpoint: 1024,
