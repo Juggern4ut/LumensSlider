@@ -5,21 +5,22 @@ window.addEventListener("load", () => {
     slidesPerPage: 4,
     margin: 10,
     autoplay: 3000,
-    draggable: false,
+    draggable: true,
     duration: 300,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
           slidesPerPage: 2,
-          margin: 5
+          margin: 5,
+          autoplay: 1000
         }
       },
       {
         breakpoint: 600,
         settings: {
           slidesPerPage: 1,
-          margin: 0
+          margin: 1
         }
       }
     ]

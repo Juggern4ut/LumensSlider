@@ -76,9 +76,8 @@ class Lumens {
     }
 
     this.autoplayFunction = setInterval(() => {
-      var page = this.currentPage + 1 > this.slideAmount - this.slidesPerPage ? 0 : this.currentPage + 1
       this.enableTransition()
-      this.gotoPage(page)
+      this.gotoNext()
     }, this.autoplay)
   }
 
@@ -96,16 +95,17 @@ class Lumens {
       }
     }
 
-    if (this.currentBreakpointIndex != this.oldBreakpointIndex) {
-      this.oldBreakpointIndex = this.currentBreakpointIndex
-      this.resizeCallback()
-    }
-
     if (this.currentBreakpointIndex !== undefined) {
       this.updateSettings(this.initialSettings)
       this.updateSettings(this.responsive[this.currentBreakpointIndex].settings)
     } else {
       this.updateSettings(this.initialSettings)
+    }
+
+    if (this.currentBreakpointIndex != this.oldBreakpointIndex) {
+      this.oldBreakpointIndex = this.currentBreakpointIndex
+      this.resizeCallback()
+      this.initAutoplay()
     }
   }
 
@@ -120,6 +120,7 @@ class Lumens {
         return false
       }
 
+      clearInterval(this.autoplayFunction)
       this.isDragging = true
       this.track.style.transition = `all 0ms ${this.easing}`
       this.xDragStart = e.pageX
@@ -145,6 +146,7 @@ class Lumens {
         this.gotoPage()
       }
 
+      this.initAutoplay()
       this.isDragging = false
     })
 
