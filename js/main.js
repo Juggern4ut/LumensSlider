@@ -24,7 +24,9 @@ import Lumens from "./lumens"
 })([Element.prototype, Document.prototype, DocumentFragment.prototype])
 
 window.addEventListener("load", () => {
-  window.default = new Lumens(".defaultslider")
+  window.defaultslider = new Lumens(".defaultslider", {
+    slidesPerPage: 2
+  })
 
   window.autoplay = new Lumens(".autoplayslider", {
     autoplay: 2500
