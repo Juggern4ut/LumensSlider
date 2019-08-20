@@ -82,10 +82,21 @@ var Lumens =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./js/lumens.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./js/entry.js");
 /******/ })
 /************************************************************************/
 /******/ ({
+
+/***/ "./js/entry.js":
+/*!*********************!*\
+  !*** ./js/entry.js ***!
+  \*********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("module.exports = __webpack_require__(/*! ./lumens.js */ \"./js/lumens.js\").default;\n\n//# sourceURL=webpack://Lumens/./js/entry.js?");
+
+/***/ }),
 
 /***/ "./js/lumens.js":
 /*!**********************!*\
