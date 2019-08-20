@@ -226,7 +226,7 @@ export default class Lumens {
     triggerChange = triggerChange === undefined ? true : triggerChange
     page = page === undefined ? this.getCurrentPage() : page
 
-    if (page < 0 || page > this.slideAmount - this.slidesPerPage) {
+    if (page < 0 || page > this.slideAmount - this.slidesPerPage || this.currentPage == page) {
       triggerChange = false
     }
 
