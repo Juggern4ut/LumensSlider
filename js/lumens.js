@@ -1,5 +1,7 @@
 export default class Lumens {
   constructor(selector, options, showWarnings) {
+    this.showWarnings = showWarnings
+    
     this.slider = typeof selector === "string" ? document.querySelector(selector) : selector
 
     //Prevent JS from breaking if there is no element found with the given selector
@@ -8,7 +10,6 @@ export default class Lumens {
       return false
     }
 
-    this.showWarnings = showWarnings
     this.slideAmount = this.slider.children.length
 
     //OPTIONS
