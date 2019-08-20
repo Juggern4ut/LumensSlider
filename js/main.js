@@ -24,15 +24,18 @@ import Lumens from "./lumens"
 })([Element.prototype, Document.prototype, DocumentFragment.prototype])
 
 window.addEventListener("load", () => {
-  window.defaultslider = new Lumens(".defaultslider", {
-    slidesPerPage: 2
-  })
+
+  window.defaultslider = new Lumens(".defaultslider")
 
   window.autoplay = new Lumens(".autoplayslider", {
     autoplay: 2500
   })
 
   window.preventclick = new Lumens(".productslider")
+  
+  window.preventclick = new Lumens(".infiniteslider", {
+    infinite: true
+  })
 
   window.callbackslider = new Lumens(".callbackslider", {
     slidesPerPage: 2,

@@ -12,7 +12,11 @@ export default class Lumens {
     //OPTIONS
     this.setDefaultSettings()
     this.updateSettings(options)
-    this.startAtPage += this.slidesPerPage
+    
+    if(this.infinite){
+      this.startAtPage += this.slidesPerPage
+    }
+    
     this.initialSettings = options
     this.currentBreakpointIndex = undefined
     this.oldBreakpointIndex = undefined
@@ -23,7 +27,7 @@ export default class Lumens {
 
     //CALCULATIONS
 
-    this.slideAmount = this.slider.children.length + 2 * this.slidesPerPage
+    this.slideAmount = this.infinite ? this.slider.children.length + 2 * this.slidesPerPage : this.slider.children.length
 
     this.calculateWidths()
 
@@ -205,7 +209,8 @@ export default class Lumens {
    * @returns {void}
    */
   setupSlides() {
-    for (let i = 0; i < this.slideAmount - 2 * this.slidesPerPage; i++) {
+    var loopLength = this.infinite ? this.slideAmount - 2 * this.slidesPerPage : this.slideAmount
+    for (let i = 0; i < loopLength; i++) {
       const slide = this.slider.children[0]
       slide.className += " lumens__slide"
       slide.style.width = this.slideWidth - this.margin * 2 + "px"
@@ -215,12 +220,14 @@ export default class Lumens {
     }
 
     //CLONES
-    for (let i = 0; i < this.slidesPerPage; i++) {
-      this.track.prepend(this.track.children[this.track.children.length - 1 - i].cloneNode(true))
-    }
+    if (this.infinite) {
+      for (let i = 0; i < this.slidesPerPage; i++) {
+        this.track.prepend(this.track.children[this.track.children.length - 1 - i].cloneNode(true))
+      }
 
-    for (let i = 0; i < this.slidesPerPage; i++) {
-      this.track.append(this.track.children[i + this.slidesPerPage].cloneNode(true))
+      for (let i = 0; i < this.slidesPerPage; i++) {
+        this.track.append(this.track.children[i + this.slidesPerPage].cloneNode(true))
+      }
     }
 
     this.slides = this.track.children
@@ -250,19 +257,23 @@ export default class Lumens {
     this.currentPage = page
     if (triggerChange) {
       this.changeCallback()
-      if (this.currentPage === 0) {
-        setTimeout(() => {
-          this.disableTransition()
-          this.gotoPage(this.slideAmount - this.slidesPerPage * 2)
-        }, this.duration)
+
+      if (this.infinite) {
+        if (this.currentPage === 0) {
+          setTimeout(() => {
+            this.disableTransition()
+            this.gotoPage(this.slideAmount - this.slidesPerPage * 2)
+          }, this.duration)
+        }
+
+        if (this.currentPage >= this.slideAmount - this.slidesPerPage) {
+          setTimeout(() => {
+            this.disableTransition()
+            this.gotoPage(this.slidesPerPage)
+          }, this.duration)
+        }
       }
 
-      if(this.currentPage >= this.slideAmount - this.slidesPerPage){
-        setTimeout(() => {
-          this.disableTransition()
-          this.gotoPage(this.slidesPerPage)
-        }, this.duration)
-      }
     }
   }
 
@@ -331,6 +342,7 @@ export default class Lumens {
     this.responsive = []
     this.noOuterMargin = false
     this.startAtPage = 0
+    this.infinite = false
     this.changeCallback = () => {}
     this.resizeCallback = () => {}
 

@@ -40,7 +40,8 @@ h4 {
 .autoplayslider,
 .callbackslider,
 .apislider,
-.productslider {
+.productslider,
+.infiniteslider {
   width: 500px;
   max-width: calc(100% - 20px);
   margin: 0 auto; }
@@ -48,7 +49,8 @@ h4 {
   .autoplayslider .lumens__slide,
   .callbackslider .lumens__slide,
   .apislider .lumens__slide,
-  .productslider .lumens__slide {
+  .productslider .lumens__slide,
+  .infiniteslider .lumens__slide {
     height: 150px;
     background-color: #fff;
     color: #333;
