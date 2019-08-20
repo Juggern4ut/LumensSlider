@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --mode production --watch",
+    "build": "webpack --mode development --watch",
     "compile:sass": "node-sass scss/main.scss css/style.css -w --source-map true"
   },
   "author": "",
