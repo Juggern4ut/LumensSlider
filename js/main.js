@@ -31,7 +31,7 @@ window.addEventListener("load", () => {
     autoplay: 3000,
     noOuterMargin: false,
     showWarnings: true,
-    startAtPage: 3,
+    startAtPage: 2,
     draggable: true,
     duration: 300,
     responsive: [
@@ -51,7 +51,7 @@ window.addEventListener("load", () => {
         }
       }
     ]
-  })
+  }, true)
 
   document.getElementById("prev").addEventListener("click", () => {
     window.a.gotoPrev()

@@ -1,7 +1,7 @@
 export default class Lumens {
   constructor(selector, options, showWarnings) {
-    this.showWarnings = showWarnings
     
+    this.showWarnings = showWarnings
     this.slider = typeof selector === "string" ? document.querySelector(selector) : selector
 
     //Prevent JS from breaking if there is no element found with the given selector
@@ -48,6 +48,7 @@ export default class Lumens {
     this.track.style.width = this.sliderWidth + "px"
     this.track.style.overflow = "hidden"
     this.setTransform(this.startAtPage * this.slideWidth * -1)
+    this.xOffset = this.startAtPage * this.slideWidth * -1
     this.currentPage = this.startAtPage
     this.slider.append(this.track)
   }
@@ -120,13 +121,13 @@ export default class Lumens {
    * @returns {void}
    */
   initializeDragging() {
-    this.slider.addEventListener("mousedown", e => {
+    var mouseDown = e => {
       if (!this.draggable) {
         this.warn("Dragging is disabled")
         return false
       }
 
-      if (e.button !== this.mouseButton) {
+      if (e.button !== this.mouseButton && this.mouseButton !== false) {
         this.warn("Dragging is not possible with this mouse-button")
         return false
       }
@@ -136,9 +137,9 @@ export default class Lumens {
       this.isDragging = true
       this.track.style.transition = `all 0ms ${this.easing}`
       this.xDragStart = e.pageX
-    })
+    }
 
-    document.addEventListener("mouseup", () => {
+    var mouseUp = e => {
       if (!this.isDragging) {
         return false
       }
@@ -160,17 +161,26 @@ export default class Lumens {
 
       this.initAutoplay()
       this.isDragging = false
-    })
+    }
 
-    document.addEventListener("mousemove", e => {
-      e.preventDefault()
+    var mouseMove = e => {
       if (!this.isDragging) {
+        e.preventDefault()
         return false
       }
 
       this.xDragDelta = e.pageX - this.xDragStart
       this.setTransform(this.xOffset + this.xDragDelta)
-    })
+    }
+
+    this.slider.addEventListener("mousedown", mouseDown)
+    this.slider.addEventListener("touchstart", mouseDown)
+
+    document.addEventListener("mouseup", mouseUp)
+    document.addEventListener("touchend", mouseUp)
+
+    document.addEventListener("mousemove", mouseMove)
+    document.addEventListener("touchmove", mouseMove)
   }
 
   /**
@@ -289,7 +299,7 @@ export default class Lumens {
     this.draggable = true
     this.threshold = 20
     this.loop = false
-    this.mouseButton = 0
+    this.mouseButton = false
     this.preventClickDistance = 100
     this.responsive = []
     this.noOuterMargin = false

@@ -1,13 +1,11 @@
 const path = require("path")
 
 module.exports = {
-  entry: "./js/entry.js",
+  entry: "./js/main.js",
   mode: "development",
   output: {
-    filename: "lumens.js",
-    path: path.resolve(__dirname, "dist"),
-    libraryTarget: 'var',
-    library: 'Lumens'
+    filename: "main.js",
+    path: path.resolve(__dirname, "dist")
   },
   module: {
     rules: [
