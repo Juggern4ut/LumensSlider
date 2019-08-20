@@ -1,6 +1,5 @@
 export default class Lumens {
   constructor(selector, options, showWarnings) {
-    
     this.showWarnings = showWarnings
     this.slider = typeof selector === "string" ? document.querySelector(selector) : selector
 
@@ -137,11 +136,9 @@ export default class Lumens {
       this.isDragging = true
       this.track.style.transition = `all 0ms ${this.easing}`
       this.xDragStart = e.type === "touchstart" ? e.touches[0].pageX : e.pageX
-      
     }
 
     var mouseUp = e => {
-
       if (!this.isDragging) {
         return false
       }
@@ -172,7 +169,7 @@ export default class Lumens {
       }
 
       var tmp = e.type === "touchmove" ? e.touches[0].pageX : e.pageX
-      
+
       this.xDragDelta = tmp - this.xDragStart
       this.setTransform(this.xOffset + this.xDragDelta)
     }

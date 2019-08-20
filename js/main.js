@@ -1,5 +1,4 @@
 import Lumens from "./lumens"
-
 ;(function(arr) {
   arr.forEach(function(item) {
     if (item.hasOwnProperty("append")) {
@@ -25,33 +24,37 @@ import Lumens from "./lumens"
 })([Element.prototype, Document.prototype, DocumentFragment.prototype])
 
 window.addEventListener("load", () => {
-  window.a = new Lumens(".productslider", {
-    slidesPerPage: 4,
-    margin: 10,
-    autoplay: 3000,
-    noOuterMargin: false,
-    showWarnings: true,
-    startAtPage: 2,
-    draggable: true,
-    duration: 300,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesPerPage: 2,
-          margin: 5,
-          autoplay: 1000
+  window.a = new Lumens(
+    ".productslider",
+    {
+      slidesPerPage: 4,
+      margin: 10,
+      autoplay: 3000,
+      noOuterMargin: false,
+      showWarnings: true,
+      startAtPage: 2,
+      draggable: true,
+      duration: 300,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesPerPage: 2,
+            margin: 5,
+            autoplay: 1000
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesPerPage: 1,
+            margin: 0
+          }
         }
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesPerPage: 1,
-          margin: 1
-        }
-      }
-    ]
-  }, true)
+      ]
+    },
+    true
+  )
 
   document.getElementById("prev").addEventListener("click", () => {
     window.a.gotoPrev()
