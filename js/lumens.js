@@ -1,4 +1,4 @@
-class Lumens {
+export default class Lumens {
   constructor(selector, options, showWarnings) {
     this.slider = typeof selector === "string" ? document.querySelector(selector) : selector
 
@@ -400,5 +400,3 @@ class Lumens {
     }
   }
 }
-
-export default Lumens
