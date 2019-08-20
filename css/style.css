@@ -42,6 +42,7 @@ h4 {
 .apislider,
 .productslider {
   width: 500px;
+  max-width: calc(100% - 20px);
   margin: 0 auto; }
   .defaultslider .lumens__slide,
   .autoplayslider .lumens__slide,
