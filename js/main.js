@@ -58,13 +58,6 @@ window.addEventListener("load", () => {
     }, 1000)
   })
 
-  let slides = document.querySelectorAll(".slide img")
-  Array.from(slides).forEach(slide => {
-    slide.addEventListener("click", () => {
-      window.location.href = "https://placekitten.com"
-    })
-  })
-
   window.apislider = new Lumens(".apislider", {
     draggable: false
   })
