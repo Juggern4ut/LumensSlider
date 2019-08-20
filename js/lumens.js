@@ -136,10 +136,12 @@ export default class Lumens {
       clearInterval(this.autoplayFunction)
       this.isDragging = true
       this.track.style.transition = `all 0ms ${this.easing}`
-      this.xDragStart = e.pageX
+      this.xDragStart = e.type === "touchstart" ? e.touches[0].pageX : e.pageX
+      
     }
 
     var mouseUp = e => {
+
       if (!this.isDragging) {
         return false
       }
@@ -169,7 +171,9 @@ export default class Lumens {
         return false
       }
 
-      this.xDragDelta = e.pageX - this.xDragStart
+      var tmp = e.type === "touchmove" ? e.touches[0].pageX : e.pageX
+      
+      this.xDragDelta = tmp - this.xDragStart
       this.setTransform(this.xOffset + this.xDragDelta)
     }
 
@@ -189,6 +193,7 @@ export default class Lumens {
    * @returns {void}
    */
   setTransform(value) {
+    //console.log(value)
     this.track.style.msTransform = `translate3d(${value}px, 0, 0)`
     this.track.style.webkitTransform = `translate3d(${value}px, 0, 0)`
     this.track.style.MozTransform = `translate3d(${value}px, 0, 0)`
