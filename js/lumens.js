@@ -46,7 +46,8 @@ class Lumens {
     this.track.className = "lumens__track"
     this.track.style.width = this.sliderWidth + "px"
     this.track.style.overflow = "hidden"
-    this.track.style.transform = "translate3d(0, 0, 0)"
+    this.setTransform(this.startAtPage * this.slideWidth * -1)
+    this.currentPage = this.startAtPage
     this.slider.append(this.track)
   }
 
@@ -285,13 +286,13 @@ class Lumens {
     this.autoplay = false
     this.autoplayFunction = undefined
     this.draggable = true
-    this.multipleDrag = true
     this.threshold = 20
     this.loop = false
     this.mouseButton = 0
     this.preventClickDistance = 100
     this.responsive = []
     this.noOuterMargin = false
+    this.startAtPage = 0
     this.changeCallback = () => {}
     this.resizeCallback = () => {}
 

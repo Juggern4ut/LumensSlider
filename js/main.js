@@ -31,6 +31,7 @@ window.addEventListener("load", () => {
     autoplay: 3000,
     noOuterMargin: false,
     showWarnings: true,
+    startAtPage: 3,
     draggable: true,
     duration: 300,
     responsive: [
