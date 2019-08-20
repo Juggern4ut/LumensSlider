@@ -49,7 +49,9 @@ h4 {
 }
 
 .defaultslider,
-.autoplayslider {
+.autoplayslider,
+.callbackslider,
+.apislider {
   width: 500px;
   margin: 0 auto;
 
@@ -59,6 +61,22 @@ h4 {
     color: #333;
     line-height: 150px;
     font-size: 50px;
+  }
+}
+
+.container button{
+  border: 0;
+  background-color: #0081D5;
+  color: #fff;
+  border-radius: 10px;
+  padding: 16px;
+  width: 100px;
+  outline: none;
+  margin: 10px;
+  transition: 200ms ease-out;
+
+  &:hover{
+    background-color: #1894e7;
   }
 }
 

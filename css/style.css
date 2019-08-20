@@ -8,7 +8,7 @@ body {
   background-color: #2b333f;
   color: #fff; }
 
-h2.heading-secondary {
+.heading-secondary {
   font-size: 28px; }
 
 h1,
@@ -36,15 +36,34 @@ h4 {
     margin: 10px auto;
     max-width: 350px; }
 
-.defaultslider, .autoplayslider {
+.defaultslider,
+.autoplayslider,
+.callbackslider,
+.apislider {
   width: 500px;
   margin: 0 auto; }
-  .defaultslider .lumens__slide, .autoplayslider .lumens__slide {
+  .defaultslider .lumens__slide,
+  .autoplayslider .lumens__slide,
+  .callbackslider .lumens__slide,
+  .apislider .lumens__slide {
     height: 150px;
     background-color: #fff;
     color: #333;
     line-height: 150px;
     font-size: 50px; }
+
+.container button {
+  border: 0;
+  background-color: #0081D5;
+  color: #fff;
+  border-radius: 10px;
+  padding: 16px;
+  width: 100px;
+  outline: none;
+  margin: 10px;
+  transition: 200ms ease-out; }
+  .container button:hover {
+    background-color: #1894e7; }
 
 .productslider {
   margin: 0 auto;
