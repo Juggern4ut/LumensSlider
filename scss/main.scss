@@ -1,25 +1,81 @@
 * {
   box-sizing: border-box;
+  font-family: "Roboto";
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  background-color: #eee;
+  background-color: #2b333f;
+  color: #fff;
+}
+
+.heading-secondary {
+  font-size: 28px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 100;
+}
+
+.title {
+  text-align: center;
+  margin: 20px;
+
+  &__primary {
+    font-size: 40px;
+    display: block;
+  }
+
+  &__secondary {
+    font-size: 30px;
+    display: block;
+  }
+}
+
+.container {
+  background-color: #3d4d65;
+  text-align: center;
+  padding: 20px 0;
+  margin-bottom: 50px;
+
+  > p {
+    margin: 10px auto;
+    max-width: 350px;
+  }
+}
+
+.defaultslider,
+.autoplayslider {
+  width: 500px;
+  margin: 0 auto;
+
+  .lumens__slide {
+    height: 150px;
+    background-color: #fff;
+    color: #333;
+    line-height: 150px;
+    font-size: 50px;
+  }
 }
 
 .productslider {
   margin: 0 auto;
-  width: calc(100% - 100px);
+  width: 500px;
   position: relative;
-  border: 1px solid #555;
 
   .slide {
+    color: #333;
     border: 1px solid #dedede;
     background-color: #fff;
     text-align: center;
     margin: 10px;
     padding: 10px 0;
 
-    &__cover{
+    &__cover {
       width: 100px;
       height: 120px;
     }
@@ -84,11 +140,12 @@ body {
   height: 100px;
   position: relative;
 
-  .glide__track{
+  .glide__track {
     overflow: show;
   }
-  
-  .glide__track, .glide__slides {
+
+  .glide__track,
+  .glide__slides {
     height: 100%;
   }
 
@@ -100,18 +157,18 @@ body {
     background-size: cover;
     opacity: 0.6;
 
-    &:hover{
+    &:hover {
       opacity: 0.8;
     }
 
-    &.active{
+    &.active {
       opacity: 1;
     }
   }
 
-  .image{
+  .image {
     min-width: 100%;
     min-height: 100%;
-    width: 100%; 
+    width: 100%;
   }
 }

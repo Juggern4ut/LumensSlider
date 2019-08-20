@@ -24,26 +24,20 @@ import Lumens from "./lumens"
 })([Element.prototype, Document.prototype, DocumentFragment.prototype])
 
 window.addEventListener("load", () => {
+
+  window.default = new Lumens(".defaultslider")
+
+  window.autoplay = new Lumens(".autoplayslider", {
+    autoplay: 2500
+  })
+
   window.a = new Lumens(
     ".productslider",
     {
-      slidesPerPage: 4,
+      slidesPerPage: 2,
       margin: 10,
-      autoplay: 3000,
-      noOuterMargin: false,
-      showWarnings: true,
-      startAtPage: 2,
       draggable: true,
-      duration: 300,
       responsive: [
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesPerPage: 2,
-            margin: 5,
-            autoplay: 1000
-          }
-        },
         {
           breakpoint: 600,
           settings: {
@@ -55,22 +49,6 @@ window.addEventListener("load", () => {
     },
     true
   )
-
-  document.getElementById("prev").addEventListener("click", () => {
-    window.a.gotoPrev()
-  })
-
-  document.getElementById("next").addEventListener("click", () => {
-    window.a.gotoNext()
-  })
-
-  window.a.changed(() => {
-    console.log("changed")
-  })
-
-  window.a.resize(() => {
-    console.log("Breakpoint changed")
-  })
 
   let slides = document.querySelectorAll(".slide img")
   Array.from(slides).forEach(slide => {
