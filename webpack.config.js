@@ -1,10 +1,10 @@
 const path = require("path")
 
 module.exports = {
-  entry: "./js/main.js",
+  entry: "./js/lumens.js",
   mode: "development",
   output: {
-    filename: "main.js",
+    filename: "lumens.js",
     path: path.resolve(__dirname, "dist")
   },
   module: {
