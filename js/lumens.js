@@ -138,10 +138,10 @@ export default class Lumens {
         return false
       }
 
-      if (e.type !== "touch") {
+      if (e.type !== "touchstart") {
         e.preventDefault()
       }
-      
+
       clearInterval(this.autoplayFunction)
       this.isDragging = true
       this.disableTransition()
