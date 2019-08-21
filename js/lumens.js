@@ -166,9 +166,10 @@ export default class Lumens {
 
     var mouseMove = e => {
       if (!this.isDragging) {
-        e.preventDefault()
         return false
       }
+
+      e.preventDefault()
 
       var tmp = e.type === "touchmove" ? e.touches[0].pageX : e.pageX
 
@@ -337,7 +338,7 @@ export default class Lumens {
     this.threshold = 20
     this.loop = false
     this.mouseButton = false
-    this.preventClickDistance = 100
+    this.preventClickDistance = 50
     this.responsive = []
     this.noOuterMargin = false
     this.startAtPage = 0
