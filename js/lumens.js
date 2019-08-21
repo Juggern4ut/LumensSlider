@@ -138,7 +138,10 @@ export default class Lumens {
         return false
       }
 
-      //e.preventDefault()
+      if (e.type !== "touch") {
+        e.preventDefault()
+      }
+      
       clearInterval(this.autoplayFunction)
       this.isDragging = true
       this.disableTransition()
@@ -169,7 +172,7 @@ export default class Lumens {
       if (!this.isDragging) {
         return false
       }
-      
+
       e.preventDefault()
 
       var tmp = e.type === "touchmove" ? e.touches[0].pageX : e.pageX
@@ -430,7 +433,6 @@ export default class Lumens {
    * @returns {void}
    */
   preventClickOnDrag() {
-
     var triggerClick = e => {
       if (Math.abs(this.xDragDelta) > this.preventClickDistance) {
         e.stopPropagation()
