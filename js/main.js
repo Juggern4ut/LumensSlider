@@ -69,6 +69,10 @@ window.addEventListener("load", () => {
     draggable: false
   })
 
+  window.arrowslider = new Lumens(".arrowslider", {
+    arrowControls: true
+  })
+
   document.getElementById("next").addEventListener("click", () => {
     window.apislider.gotoNext()
   })

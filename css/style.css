@@ -157,7 +157,8 @@ code {
 .callbackslider,
 .apislider,
 .productslider,
-.infiniteslider {
+.infiniteslider,
+.arrowslider {
   width: 500px;
   max-width: calc(100% - 20px);
   margin: 0 auto; }
@@ -166,7 +167,8 @@ code {
   .callbackslider .lumens__slide,
   .apislider .lumens__slide,
   .productslider .lumens__slide,
-  .infiniteslider .lumens__slide {
+  .infiniteslider .lumens__slide,
+  .arrowslider .lumens__slide {
     height: 150px;
     background-color: #fff;
     color: #333;
@@ -177,7 +179,8 @@ code {
     .callbackslider .lumens__slide a,
     .apislider .lumens__slide a,
     .productslider .lumens__slide a,
-    .infiniteslider .lumens__slide a {
+    .infiniteslider .lumens__slide a,
+    .arrowslider .lumens__slide a {
       color: #1a0dab; }
 
 .container button {

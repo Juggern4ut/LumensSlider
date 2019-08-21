@@ -40,6 +40,7 @@ export default class Lumens {
     this.addResizeEventListener()
     this.preventClickOnDrag()
     this.initAutoplay()
+    this.initArrowControls()
     this.slider.style.height = "auto"
   }
 
@@ -314,7 +315,7 @@ export default class Lumens {
    * @returns {Number} The current page the slider is on
    */
   getCurrentPage() {
-    if(this.xOffset > 0){
+    if (this.xOffset > 0) {
       return 0
     }
 
@@ -337,6 +338,7 @@ export default class Lumens {
     this.draggable = true
     this.threshold = 20
     this.loop = false
+    this.arrowControls = false
     this.mouseButton = false
     this.preventClickDistance = 50
     this.responsive = []
@@ -351,6 +353,25 @@ export default class Lumens {
     this.xDragDelta = 0
     this.xOffset = 0
     this.currentPage = 0
+  }
+
+  /**
+   * Gives the slideshow the ability to be controlled
+   * by using the left and right arrow-keys, if enabled.
+   * @returns {void}
+   */
+  initArrowControls() {
+    if (!this.arrowControls) {
+      return false
+    }
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "ArrowLeft") {
+        this.gotoPrev()
+      } else if (event.key === "ArrowRight") {
+        this.gotoNext()
+      }
+    })
   }
 
   /**
