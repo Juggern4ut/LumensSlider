@@ -141,7 +141,7 @@ export default class Lumens {
       e.preventDefault()
       clearInterval(this.autoplayFunction)
       this.isDragging = true
-      this.track.style.transition = `all 0ms ${this.easing}`
+      this.disableTransition()
       this.xDragStart = e.type === "touchstart" ? e.touches[0].pageX : e.pageX
     }
 
@@ -366,9 +366,9 @@ export default class Lumens {
     }
 
     document.addEventListener("keydown", event => {
-      if (event.key === "ArrowLeft") {
+      if (event.key === "ArrowLeft" || event.key === "Left") {
         this.gotoPrev()
-      } else if (event.key === "ArrowRight") {
+      } else if (event.key === "ArrowRight" || event.key === "Right") {
         this.gotoNext()
       }
     })
