@@ -157,7 +157,6 @@ export default class Lumens {
       } else if (this.xDragDelta >= this.threshold && this.xOffset < 0) {
         this.gotoPrev()
       } else {
-        console.log("yis")
         this.gotoPage()
       }
 
@@ -317,7 +316,7 @@ export default class Lumens {
     if(this.xOffset > 0){
       return 0
     }
-    
+
     return Math.abs(Math.round(this.xOffset / this.slideWidth))
   }
 
