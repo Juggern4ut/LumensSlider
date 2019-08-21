@@ -8,6 +8,7 @@
 	<script src="dist/main.js"></script>
 
 	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300&display=swap" rel="stylesheet">
+	<link href="https://myCDN.com/prism@v1.x/themes/prism.css" rel="stylesheet" />
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -26,6 +27,9 @@
 			<div>Slide 4</div>
 			<div>Slide 5</div>
 		</div>
+
+		<pre class="language-js"><code>var defaultslider = new Lumens(".defaultslider")</code></pre>
+
 	</section>
 
 	<section class="container">
@@ -40,6 +44,10 @@
 			<div>Slide 5</div>
 		</div>
 
+<pre class="language-js"><code class="language-js">var preventclick = new Lumens(".infiniteslider", {
+	infinite: true
+})</code></pre>
+
 	</section>
 
 	<section class="container">
@@ -53,7 +61,11 @@
 			<div>Slide 4</div>
 			<div>Slide 5</div>
 		</div>
-	</section>
+
+<pre class="language-js"><code class="language-js">var preventclick = new Lumens(".infiniteslider", {
+	autoplay: 2500
+})</code></pre>
+</section>
 
 	<section class="container">
 		<h2 class="heading-secondary">Prevent click</h2>
@@ -66,11 +78,11 @@
 			<div><a target="_blank" href="https://placekitten.com">Slide 5</a></div>
 		</div>
 	</section>
-
+	
 	<section class="container">
 		<h2 class="heading-secondary">Callbacks</h2>
 		<p>Lumens provides you with callback functions for changing slides or changing the breakpoints during resizing.</p><p>Try swiping and resizing the window (below 1024px) to trigger callbacks.</p>
-	
+		
 		<div class="callbackslider">
 			<div>Slide 1</div>
 			<div>Slide 2</div>
@@ -78,23 +90,59 @@
 			<div>Slide 4</div>
 			<div>Slide 5</div>
 		</div>
-		<p id="callback">&nbsp;</p>
-	</section>
 
-	<section class="container">
-		<h2 class="heading-secondary">API</h2>
-		<p>Use the given functions to control how the slideshow acts just as you want it to</p>
+		<p id="callback">&nbsp;</p>
+		
+<pre class="language-js"><code class="language-js">var callbackslider = new Lumens(".callbackslider", {
+	slidesPerPage: 2,
+	responsive: [
+	{
+		breakpoint: 1024,
+		settings: {
+			slidesPerPage: 1
+		}
+	}
+	]
+})
+
+callbackslider.changed(() => {
+	//SLIDE CHANGED
+})
+
+callbackslider.resize(() => {
+	//NEW BREAKPOINT REACHED
+})</code></pre>
+
+
+</section>
+
+<section class="container">
+	<h2 class="heading-secondary">API</h2>
+	<p>Use the given functions to control how the slideshow acts just as you want it to</p>
 	
-		<div class="apislider">
-			<div>Slide 1</div>
-			<div>Slide 2</div>
-			<div>Slide 3</div>
-			<div>Slide 4</div>
-			<div>Slide 5</div>
-		</div>
-		<button id="prev">Previous</button>
-		<button id="next">Next</button>
-	</section>
+	<div class="apislider">
+		<div>Slide 1</div>
+		<div>Slide 2</div>
+		<div>Slide 3</div>
+		<div>Slide 4</div>
+		<div>Slide 5</div>
+	</div>
+	<button id="prev">Previous</button>
+	<button id="next">Next</button>
+
+<pre class="language-js"><code class="language-js">apislider = new Lumens(".apislider", {
+	draggable: false
+})
+
+document.getElementById("next").addEventListener("click", () => {
+	apislider.gotoNext()
+})
+
+document.getElementById("prev").addEventListener("click", () => {
+	apislider.gotoPrev()
+})</code></pre>
+
+</section>
 
 	<footer>
 		<a href="https://github.com/Juggern4ut/lumens">Lumens on Github</a>

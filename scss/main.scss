@@ -1,6 +1,8 @@
+@import './prism.scss';
+
 * {
   box-sizing: border-box;
-  font-family: "Roboto";
+  font-family: inherit;
   margin: 0;
   padding: 0;
 }
@@ -8,6 +10,7 @@
 body {
   background-color: #2b333f;
   color: #fff;
+  font-family: "Roboto";
 }
 
 .heading-secondary {
@@ -46,6 +49,18 @@ h4 {
     margin: 10px auto;
     max-width: 350px;
   }
+}
+
+pre.language-js{
+  text-align: left !important;
+  width: 800px;
+  max-width: calc(100% - 20px);
+  margin: 30px auto 10px;
+}
+
+code{
+  text-align: inherit;
+  font-family: "consolas";
 }
 
 .defaultslider,

@@ -1,4 +1,6 @@
 import Lumens from "./lumens"
+import "./prism.min"
+
 ;(function(arr) {
   arr.forEach(function(item) {
     if (item.hasOwnProperty("append")) {
@@ -32,7 +34,7 @@ window.addEventListener("load", () => {
   })
 
   window.preventclick = new Lumens(".productslider")
-  
+
   window.preventclick = new Lumens(".infiniteslider", {
     infinite: true
   })
