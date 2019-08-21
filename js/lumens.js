@@ -138,7 +138,7 @@ export default class Lumens {
         return false
       }
 
-      e.preventDefault()
+      //e.preventDefault()
       clearInterval(this.autoplayFunction)
       this.isDragging = true
       this.disableTransition()
@@ -169,7 +169,7 @@ export default class Lumens {
       if (!this.isDragging) {
         return false
       }
-
+      
       e.preventDefault()
 
       var tmp = e.type === "touchmove" ? e.touches[0].pageX : e.pageX
@@ -185,7 +185,7 @@ export default class Lumens {
     document.addEventListener("touchend", mouseUp)
 
     document.addEventListener("mousemove", mouseMove)
-    document.addEventListener("touchmove", mouseMove)
+    document.addEventListener("touchmove", mouseMove, { passive: false })
   }
 
   /**
@@ -430,17 +430,17 @@ export default class Lumens {
    * @returns {void}
    */
   preventClickOnDrag() {
-    document.addEventListener(
-      "click",
-      e => {
-        if (Math.abs(this.xDragDelta) > this.preventClickDistance) {
-          e.stopPropagation()
-          e.preventDefault()
-          this.xDragDelta = 0
-        }
-      },
-      true
-    )
+
+    var triggerClick = e => {
+      if (Math.abs(this.xDragDelta) > this.preventClickDistance) {
+        e.stopPropagation()
+        e.preventDefault()
+        this.xDragDelta = 0
+      }
+    }
+
+    document.addEventListener("click", triggerClick, true)
+    document.addEventListener("touchend", triggerClick)
   }
 
   /**
