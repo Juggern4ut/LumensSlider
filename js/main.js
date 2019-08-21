@@ -33,7 +33,9 @@ window.addEventListener("load", () => {
     autoplay: 2500
   })
 
-  window.preventclick = new Lumens(".productslider")
+  window.preventclick = new Lumens(".productslider", {
+    preventClickDistance: 50
+  })
 
   window.preventclick = new Lumens(".infiniteslider", {
     infinite: true

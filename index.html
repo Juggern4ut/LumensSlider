@@ -43,7 +43,7 @@
 			<div>Slide 5</div>
 		</div>
 
-<pre class="language-js"><code class="language-js">var preventclick = new Lumens(".infiniteslider", {
+<pre class="language-js"><code class="language-js">var infiniteslider	 = new Lumens(".infiniteslider", {
 	infinite: true
 })</code></pre>
 
@@ -61,22 +61,25 @@
 			<div>Slide 5</div>
 		</div>
 
-<pre class="language-js"><code class="language-js">var preventclick = new Lumens(".infiniteslider", {
+<pre class="language-js"><code class="language-js">var autoplay = new Lumens(".autoplay", {
 	autoplay: 2500
 })</code></pre>
 </section>
 
-	<section class="container">
-		<h2 class="heading-secondary">Prevent click</h2>
-		<p>In this example the slides contain a Link. If you drag them, the click will not be triggered.</p>
-		<div class="productslider">
-			<div><a target="_blank" href="https://placekitten.com">Slide 1</a></div>
-			<div><a target="_blank" href="https://placekitten.com">Slide 2</a></div>
-			<div><a target="_blank" href="https://placekitten.com">Slide 3</a></div>
-			<div><a target="_blank" href="https://placekitten.com">Slide 4</a></div>
-			<div><a target="_blank" href="https://placekitten.com">Slide 5</a></div>
-		</div>
-	</section>
+<section class="container">
+	<h2 class="heading-secondary">Prevent click</h2>
+	<p>In this example the slides contain a Link. If you drag them, the click will not be triggered.</p>
+	<div class="productslider">
+		<div><a target="_blank" href="https://placekitten.com">Slide 1</a></div>
+		<div><a target="_blank" href="https://placekitten.com">Slide 2</a></div>
+		<div><a target="_blank" href="https://placekitten.com">Slide 3</a></div>
+		<div><a target="_blank" href="https://placekitten.com">Slide 4</a></div>
+		<div><a target="_blank" href="https://placekitten.com">Slide 5</a></div>
+	</div>
+<pre class="language-js"><code class="language-js">var preventclick = new Lumens(".preventclick", {
+	preventClickDistance: 50
+})</code></pre>
+</section>
 	
 	<section class="container">
 		<h2 class="heading-secondary">Callbacks</h2>
