@@ -194,11 +194,11 @@ export default class Lumens {
    * @returns {void}
    */
   setTransform(value) {
-    this.track.style.msTransform = `translate3d(${value}px, 0, 0)`
-    this.track.style.webkitTransform = `translate3d(${value}px, 0, 0)`
-    this.track.style.MozTransform = `translate3d(${value}px, 0, 0)`
-    this.track.style.OTransform = `translate3d(${value}px, 0, 0)`
-    this.track.style.transform = `translate3d(${value}px, 0, 0)`
+    this.track.style.msTransform = `translate(${value}px, 0)`
+    this.track.style.webkitTransform = `translate(${value}px, 0)`
+    this.track.style.MozTransform = `translate(${value}px, 0)`
+    this.track.style.OTransform = `translate(${value}px, 0)`
+    this.track.style.transform = `translate(${value}px, 0)`
   }
 
   /**
@@ -448,6 +448,10 @@ export default class Lumens {
    * @returns {void}
    */
   enableTransition() {
+    this.track.style.msTransition = `all ${this.duration}ms ${this.easing}`
+    this.track.style.webkitTransition = `all ${this.duration}ms ${this.easing}`
+    this.track.style.MozTransition = `all ${this.duration}ms ${this.easing}`
+    this.track.style.OTransition = `all ${this.duration}ms ${this.easing}`
     this.track.style.transition = `all ${this.duration}ms ${this.easing}`
   }
 
@@ -456,6 +460,10 @@ export default class Lumens {
    * @returns {void}
    */
   disableTransition() {
+    this.track.style.msTransition = `all 0ms ${this.easing}`
+    this.track.style.webkitTransition = `all 0ms ${this.easing}`
+    this.track.style.MozTransition = `all 0ms ${this.easing}`
+    this.track.style.OTransition = `all 0ms ${this.easing}`
     this.track.style.transition = `all 0ms ${this.easing}`
   }
 
