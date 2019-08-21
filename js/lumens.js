@@ -12,11 +12,11 @@ export default class Lumens {
     //OPTIONS
     this.setDefaultSettings()
     this.updateSettings(options)
-    
-    if(this.infinite){
+
+    if (this.infinite) {
       this.startAtPage += this.slidesPerPage
     }
-    
+
     this.initialSettings = options
     this.currentBreakpointIndex = undefined
     this.oldBreakpointIndex = undefined
@@ -152,15 +152,12 @@ export default class Lumens {
       this.enableTransition()
       this.xOffset += this.xDragDelta
 
-      var currentPage = this.currentPage
-
-      if (this.xOffset > 0) {
-        var changing = currentPage != 0
-        this.gotoPage(0, changing)
-      } else if (Math.abs(this.xOffset) + this.slidesPerPage * (this.slideWidth + this.margin * 2) >= this.sliderWidth) {
-        var changing = currentPage < this.slideAmount - this.slidesPerPage
-        this.gotoPage(this.slideAmount - this.slidesPerPage, changing)
+      if (this.xDragDelta <= this.threshold * -1 && this.xOffset > (this.sliderWidth - this.slidesPerPage * this.slideWidth) * -1) {
+        this.gotoNext()
+      } else if (this.xDragDelta >= this.threshold && this.xOffset < 0) {
+        this.gotoPrev()
       } else {
+        console.log("yis")
         this.gotoPage()
       }
 
@@ -273,7 +270,6 @@ export default class Lumens {
           }, this.duration)
         }
       }
-
     }
   }
 
@@ -318,6 +314,10 @@ export default class Lumens {
    * @returns {Number} The current page the slider is on
    */
   getCurrentPage() {
+    if(this.xOffset > 0){
+      return 0
+    }
+    
     return Math.abs(Math.round(this.xOffset / this.slideWidth))
   }
 
