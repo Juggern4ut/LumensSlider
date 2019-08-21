@@ -172,6 +172,13 @@ code {
     color: #333;
     line-height: 150px;
     font-size: 50px; }
+    .defaultslider .lumens__slide a,
+    .autoplayslider .lumens__slide a,
+    .callbackslider .lumens__slide a,
+    .apislider .lumens__slide a,
+    .productslider .lumens__slide a,
+    .infiniteslider .lumens__slide a {
+      color: #1a0dab; }
 
 .container button {
   border: 0;
