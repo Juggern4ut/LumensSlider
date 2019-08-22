@@ -149,6 +149,9 @@ ul {
   margin: 0;
   padding: 0; }
 
+pre {
+  border: 1px solid; }
+
 body {
   background-color: #2b333f;
   color: #fff;
@@ -160,7 +163,7 @@ body {
   body > article:not(:last-of-type)::after {
     display: block;
     position: static;
-    content: ' ';
+    content: " ";
     width: 10rem;
     height: 1px;
     background-color: #fff;
