@@ -173,7 +173,9 @@ export default class Lumens {
         return false
       }
 
-      e.preventDefault()
+      if (e.type !== "touchmove") {
+        e.preventDefault()
+      }
 
       var tmp = e.type === "touchmove" ? e.touches[0].pageX : e.pageX
 
@@ -436,7 +438,9 @@ export default class Lumens {
     var triggerClick = e => {
       if (Math.abs(this.xDragDelta) > this.preventClickDistance) {
         e.stopPropagation()
-        e.preventDefault()
+        if(e.type !== "touchend"){
+          e.preventDefault()
+        }
         this.xDragDelta = 0
       }
     }
