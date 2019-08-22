@@ -15,6 +15,21 @@ Lumens is a very tiny and very easy to use JavaScript carousel. It works with pl
 - Callbacks. Do stuff when stuff was done.
 - Prevents click-event on drag. You think that should be a default, but sadly, it's really not.
 
+### Support
+
+Lumens supports all the modern Browsers. It even works with IE9 but has drawbacks on the sliding-animation.
+
+Following Browsers work:
+- Google Chrome
+- Mozilla Firefox
+- Microsoft Edge
+- Microsoft Edge Chromium Engine
+- Opera
+- Internet Explorer >= Version 9
+- Safari
+
+You can find a google sheet with all the test-cases [here](https://docs.google.com/spreadsheets/d/1eUDNPch8Y_K6fcRfYqEpRuqZ_FaKXpu3oJ_yJf77-lw/edit?usp=sharing)
+
 ## Getting Started
 
 Using Lumens is as simple as it can get. Just import dist/main.js into your project (or js/lumens.js if you use a builder like webpack or so) and you're all set.
