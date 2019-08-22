@@ -1,4 +1,4 @@
 # Defines which browsers should be considered
 # when compiling and packaging the JS
 > .05%
-not ie <= 9
+not ie <= 8

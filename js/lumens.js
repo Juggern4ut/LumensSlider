@@ -133,7 +133,7 @@ export default class Lumens {
         return false
       }
 
-      if (e.button !== this.mouseButton && this.mouseButton !== false) {
+      if (e.type !== "touchstart" && e.button !== this.mouseButton && this.mouseButton !== false) {
         this.warn("Dragging is not possible with this mouse-button")
         return false
       }
