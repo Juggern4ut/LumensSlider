@@ -56,6 +56,10 @@ ul {
   padding: 0;
 }
 
+pre {
+  border: 1px solid;
+}
+
 body {
   background-color: #2b333f;
   color: #fff;
@@ -63,15 +67,15 @@ body {
   font-size: 1.8rem;
   font-weight: 300;
 
-  > article:last-of-type{
+  > article:last-of-type {
     margin-bottom: 2rem;
   }
 
-  > article:not(:last-of-type){
-    &::after{
+  > article:not(:last-of-type) {
+    &::after {
       display: block;
       position: static;
-      content: ' ';
+      content: " ";
       width: 10rem;
       height: 1px;
       background-color: #fff;
