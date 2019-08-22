@@ -4,7 +4,8 @@
   "description": "Lightweight Slideshow using Vanilla JavaScript",
   "main": "dist/main.js",
   "scripts": {
-    "build": "webpack --mode production --watch",
+    "build": "webpack --env=class --watch",
+    "build-all": "webpack --env=all --watch",
     "compile:sass": "node-sass scss/main.scss css/style.css -w --source-map true"
   },
   "repository": "juggern4ut/lumens",
