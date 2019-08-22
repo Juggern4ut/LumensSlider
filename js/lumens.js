@@ -1,3 +1,4 @@
+/** Class representing a Lumens slideshow */
 export default class Lumens {
   constructor(selector, options, showWarnings) {
     this.showWarnings = showWarnings
@@ -337,15 +338,13 @@ export default class Lumens {
     this.margin = 0
     this.duration = 200
     this.easing = "ease-out"
-    this.startIndex = 0
     this.autoplay = false
     this.autoplayFunction = undefined
     this.draggable = true
     this.threshold = 20
-    this.loop = false
     this.arrowControls = false
     this.mouseButton = false
-    this.preventClickDistance = 50
+    this.preventClickDistance = 20
     this.responsive = []
     this.noOuterMargin = false
     this.startAtPage = 0

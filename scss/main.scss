@@ -1,4 +1,53 @@
-@import './prism.scss';
+@import "./prism.scss";
+
+html {
+  font-size: 62.5%;
+}
+
+#warning {
+  background-color: #b54c4c;
+  font-weight: 500;
+  text-align: center;
+  padding: 2rem 8rem 2rem 8rem;
+  background-image: url(../front/roadwork.png);
+  background-repeat: no-repeat;
+  background-size: 5rem;
+  background-position: 1rem center;
+
+  p {
+    margin-top: 0;
+  }
+}
+
+h1,
+h2,
+p,
+nav {
+  &:first-child {
+    margin-top: 1.5rem;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 1.5rem;
+  }
+}
+
+p {
+  line-height: 3rem;
+}
+
+b {
+  font-weight: 500;
+}
+
+a {
+  text-decoration: none;
+  color: #0081d5;
+}
+
+ul {
+  padding-left: 2.5rem;
+}
 
 * {
   box-sizing: border-box;
@@ -11,10 +60,19 @@ body {
   background-color: #2b333f;
   color: #fff;
   font-family: "Roboto";
+  font-size: 1.8rem;
+  font-weight: 300;
+}
+
+article {
+  width: 70rem;
+  max-width: calc(100% - 3rem);
+  text-align: justify;
+  margin: 0 auto;
 }
 
 .heading-secondary {
-  font-size: 28px;
+  font-size: 2.8rem;
 }
 
 h1,
@@ -26,39 +84,43 @@ h4 {
 
 .title {
   text-align: center;
-  margin: 20px;
+  margin: 2rem;
 
   &__primary {
-    font-size: 40px;
+    font-size: 4rem;
     display: block;
   }
 
   &__secondary {
-    font-size: 30px;
+    font-size: 3rem;
     display: block;
+  }
+
+  hr {
+    width: 100px;
+    display: inline-block;
   }
 }
 
 .container {
   background-color: #3d4d65;
   text-align: center;
-  padding: 20px 0;
-  margin-bottom: 50px;
+  padding: 2rem 0;
+  margin-bottom: 5rem;
 
   > p {
-    margin: 10px auto;
-    max-width: 350px;
+    margin: 1rem auto;
+    max-width: 35rem;
   }
 }
 
-pre.language-js{
+pre.language-js {
   text-align: left !important;
-  width: 800px;
-  max-width: calc(100% - 20px);
-  margin: 30px auto 10px;
+  width: 100%;
+  margin: 3rem auto 1rem;
 }
 
-code{
+code {
   text-align: inherit;
   font-family: "consolas";
 }
@@ -70,55 +132,55 @@ code{
 .productslider,
 .infiniteslider,
 .arrowslider {
-  width: 500px;
-  max-width: calc(100% - 20px);
+  width: 100%;
   margin: 0 auto;
+  text-align: center;
 
   .lumens__slide {
-    height: 150px;
+    height: 15rem;
     background-color: #fff;
     color: #333;
-    line-height: 150px;
-    font-size: 50px;
+    line-height: 15rem;
+    font-size: 5rem;
 
-    a{
+    a {
       color: #1a0dab;
     }
   }
 }
 
-.container button{
+.container button {
   border: 0;
-  background-color: #0081D5;
+  background-color: #0081d5;
   color: #fff;
-  border-radius: 10px;
-  padding: 16px;
-  width: 100px;
+  border-radius: 1rem;
+  padding: 1.6rem;
+  width: 10rem;
   outline: none;
-  margin: 10px;
+  margin: 1rem;
   transition: 200ms ease-out;
 
-  &:hover{
+  &:hover {
     background-color: #1894e7;
   }
 }
 
-footer{
+footer {
   width: 100%;
-  padding: 10px;
+  padding: 1rem;
   background-color: #fff;
   color: #2b333f;
   text-align: center;
 
-  a{
+  a {
     color: inherit;
     text-decoration: none;
-    font-size: 13px;
+    font-size: 1.3rem;
     text-transform: uppercase;
-    margin: 0 10px;
+    margin: 0 1rem;
 
-    &:hover{
-      color: #0081D5;
+    &:hover {
+      color: #0081d5;
     }
   }
 }
