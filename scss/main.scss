@@ -62,6 +62,22 @@ body {
   font-family: "Roboto";
   font-size: 1.8rem;
   font-weight: 300;
+
+  > article:last-of-type{
+    margin-bottom: 2rem;
+  }
+
+  > article:not(:last-of-type){
+    &::after{
+      display: block;
+      position: static;
+      content: ' ';
+      width: 10rem;
+      height: 1px;
+      background-color: #fff;
+      margin: 2rem 0;
+    }
+  }
 }
 
 article {
