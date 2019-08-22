@@ -67,7 +67,7 @@ window.addEventListener("load", () => {
   })
 
   window.callbackslider = new Lumens(".callbackslider", {
-    slidesPerPage: 2,
+    slidesPerPage: 1,
     responsive: [
       {
         breakpoint: 1024,

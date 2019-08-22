@@ -156,6 +156,8 @@ export default class Lumens {
       this.enableTransition()
       this.xOffset += this.xDragDelta
 
+      console.log(this.xDragDelta)
+
       if (this.xDragDelta <= this.threshold * -1 && this.xOffset > (this.sliderWidth - this.slidesPerPage * this.slideWidth) * -1) {
         this.gotoNext()
       } else if (this.xDragDelta >= this.threshold && this.xOffset < 0) {
@@ -438,11 +440,11 @@ export default class Lumens {
     var triggerClick = e => {
       if (Math.abs(this.xDragDelta) > this.preventClickDistance) {
         e.stopPropagation()
-        if(e.type !== "touchend"){
+        if (e.type !== "touchend") {
           e.preventDefault()
         }
-        this.xDragDelta = 0
       }
+      this.xDragDelta = 0
     }
 
     document.addEventListener("click", triggerClick, true)
