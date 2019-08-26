@@ -157,7 +157,9 @@ export default class Lumens {
       this.enableTransition()
       this.xOffset += this.xDragDelta
 
-      if (this.xDragDelta <= this.threshold * -1 && this.xOffset > (this.sliderWidth - this.slidesPerPage * this.slideWidth) * -1) {
+      if(this.xDragDelta < this.slideWidth * -1 || this.xDragDelta > this.slideWidth){
+        this.gotoPage()
+      } else if (this.xDragDelta <= this.threshold * -1 && this.xOffset > (this.sliderWidth - this.slidesPerPage * this.slideWidth) * -1) {
         this.gotoNext()
       } else if (this.xDragDelta >= this.threshold && this.xOffset < 0) {
         this.gotoPrev()
