@@ -36,12 +36,14 @@ export default class Lumens {
     this.createAndAddTrack()
     this.enableTransition()
     this.setupSlides()
+    this.createAndAddDotNavigation()
 
     this.initializeDragging()
     this.addResizeEventListener()
     this.preventClickOnDrag()
     this.initAutoplay()
     this.initArrowControls()
+    this.activateDot()
     this.slider.style.height = "auto"
   }
 
@@ -58,6 +60,53 @@ export default class Lumens {
     this.xOffset = this.startAtPage * this.slideWidth * -1
     this.currentPage = this.startAtPage
     this.slider.append(this.track)
+  }
+
+  /**
+   * Creates the dotnavigation and adds it after the track element.
+   * This will also handle the click event for the single dots.
+   * @returns {void}
+   */
+  createAndAddDotNavigation() {
+    if (this.dotNavigation) {
+      this.dotnav = document.createElement("div")
+      this.dotnav.className = "lumens__dot-nav"
+      this.dotnav.style.margin = "0 auto"
+      this.dotamount = Math.ceil(this.slideAmount / this.slidesPerPage)
+      this.track.after(this.dotnav)
+      for (let i = 0; i < this.dotamount; i++) {
+        let dot = document.createElement("div")
+        dot.className = "lumens__dot"
+        dot.style.width = "10px"
+        dot.style.height = "10px"
+        dot.style.borderRadius = "50%"
+        dot.style.display = "inline-block"
+        dot.style.margin = "0 10px"
+        dot.style.border = "1px solid #999"
+
+        this.dotnav.append(dot)
+        dot.addEventListener("click", () => {
+          this.gotoPage(i * this.slidesPerPage)
+        })
+      }
+    }
+  }
+
+  activateDot() {
+    if (this.dotNavigation) {
+      let dotIndex = Math.floor(this.currentPage / this.slidesPerPage)
+      this.dotnav.querySelectorAll(".lumens__dot").forEach((tmp, index) => {
+        tmp.className = index === dotIndex ? "lumens__dot lumens__dot--active" : "lumens__dot"
+      })
+
+      document.querySelectorAll(".lumens__dot").forEach(tmp => {
+        if (tmp.className.includes("lumens__dot--active")) {
+          tmp.style.backgroundColor = "#fff"
+        } else {
+          tmp.style.backgroundColor = "transparent"
+        }
+      })
+    }
   }
 
   /**
@@ -157,7 +206,7 @@ export default class Lumens {
       this.enableTransition()
       this.xOffset += this.xDragDelta
 
-      if(this.xDragDelta < this.slideWidth * -1 || this.xDragDelta > this.slideWidth){
+      if (this.xDragDelta < this.slideWidth * -1 || this.xDragDelta > this.slideWidth) {
         this.gotoPage()
       } else if (this.xDragDelta <= this.threshold * -1 && this.xOffset > (this.sliderWidth - this.slidesPerPage * this.slideWidth) * -1) {
         this.gotoNext()
@@ -261,6 +310,7 @@ export default class Lumens {
     this.setTransform(offset)
     this.xOffset = offset
     this.currentPage = page
+
     if (triggerChange) {
       this.changeCallback()
 
@@ -279,6 +329,10 @@ export default class Lumens {
           }, this.duration)
         }
       }
+    }
+
+    if (this.dotNavigation) {
+      this.activateDot()
     }
   }
 
@@ -344,6 +398,7 @@ export default class Lumens {
     this.autoplayFunction = undefined
     this.draggable = true
     this.threshold = 20
+    this.dotNavigation = false
     this.arrowControls = false
     this.mouseButton = false
     this.preventClickDistance = 20
@@ -400,15 +455,9 @@ export default class Lumens {
    */
   calculateWidths() {
     this.sliderPadding = parseInt(window.getComputedStyle(this.slider, null).getPropertyValue("padding-left"))
-    this.sliderVisibleWidth = this.slider.offsetWidth - this.sliderPadding * 2
+    this.sliderVisibleWidth = this.noOuterMargin ? this.slider.offsetWidth + 2 * this.margin - this.sliderPadding * 2 : this.slider.offsetWidth - this.sliderPadding * 2
     this.slideWidth = this.sliderVisibleWidth / this.slidesPerPage
     this.sliderWidth = this.slideWidth * this.slideAmount
-
-    if (this.noOuterMargin) {
-      this.sliderVisibleWidth += this.margin * 2
-      this.slider.style.position = "relative"
-      this.slider.style.right = this.margin + "px"
-    }
   }
 
   /**
@@ -476,7 +525,7 @@ export default class Lumens {
 
   /**
    * Will output a warning in the console as long as
-   * warning messages are enabled manually.
+   * warning messages are enabled in the constructor.
    * @param {String} warning The message the user should be warned about
    * @returns {void}
    */

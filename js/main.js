@@ -10,7 +10,8 @@ window.addEventListener("load", () => {
   })
 
   window.preventclick = new Lumens(".productslider", {
-    preventClickDistance: 50
+    preventClickDistance: 50,
+    dotNavigation: true
   })
 
   window.preventclick = new Lumens(".infiniteslider", {
@@ -19,6 +20,8 @@ window.addEventListener("load", () => {
 
   window.callbackslider = new Lumens(".callbackslider", {
     slidesPerPage: 2,
+    noOuterMargin: true,
+    margin: 10,
     responsive: [
       {
         breakpoint: 1024,
