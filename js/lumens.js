@@ -77,12 +77,12 @@ export default class Lumens {
       for (let i = 0; i < this.dotamount; i++) {
         let dot = document.createElement("div")
         dot.className = "lumens__dot"
-        dot.style.width = "10px"
-        dot.style.height = "10px"
-        dot.style.borderRadius = "50%"
+        dot.style.width = this.dotnavSize+"px"
+        dot.style.height = this.dotnavSize+"px"
+        dot.style.borderRadius = this.dotnavBorderRadius
         dot.style.display = "inline-block"
-        dot.style.margin = "0 10px"
-        dot.style.border = "1px solid #999"
+        dot.style.margin = "0 " + this.dotMargin + "px"
+        dot.style.border = this.dotnavBorder
 
         this.dotnav.append(dot)
         dot.addEventListener("click", () => {
@@ -101,9 +101,9 @@ export default class Lumens {
 
       document.querySelectorAll(".lumens__dot").forEach(tmp => {
         if (tmp.className.includes("lumens__dot--active")) {
-          tmp.style.backgroundColor = "#fff"
+          tmp.style.backgroundColor = this.dotActiveColor
         } else {
-          tmp.style.backgroundColor = "transparent"
+          tmp.style.backgroundColor = this.dotInactiveColor
         }
       })
     }
@@ -408,6 +408,13 @@ export default class Lumens {
     this.infinite = false
     this.changeCallback = () => {}
     this.resizeCallback = () => {}
+
+    this.dotnavSize = 10
+    this.dotnavBorder = "1px solid #999"
+    this.dotMargin = 10
+    this.dotActiveColor = "#fff"
+    this.dotInactiveColor = "transparent"
+    this.dotnavBorderRadius = "50%"
 
     this.isDragging = false
     this.xDragStart = 0
