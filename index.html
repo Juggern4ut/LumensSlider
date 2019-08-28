@@ -12,40 +12,74 @@
 </head>
 <body>
 
-	<img style="width: 100px; margin: 3rem auto 0; display: block;" src="front/bulb.svg" />
-	<h1 class="title">
-		<span class="title__primary">Lumens</span>
-		<span class="title__secondary">Tiny vanilla JavaScript carousel</span>
-		<hr />
-	</h1>
-
-	<div id="warning">
-		<p>Notice: This frontend is still undergoing a design overhaul and is not finished yet, but Lumens can still be used like before.</p>
-	</div>
-
-	<!--INTRO-->
-	<article class="intro">
-		<p>Lumens is a lightweight JavaScript slideshow which works without any dependencies like JQuery or other bloated libraries. 
-		It doesn't rely on a own CSS so you have nothing messing with your personal styling.<br>Lumens was built for developers. It doesn't add any
-		navigation or pagination but gives you all the tools to add them yourself. This way you have full control over what happens, and when it does so.</p>
-	</article>
-
 	<!--NAVIGATION-->
-	<article>
-		<h2>Navigation</h2>
-		<nav>
-			<a href="#compability">Compability</a><br />
-			<a href="#options">Options</a><br />
-			<a href="#installation">Installation</a><br />
-			<a href="#examples">Examples</a>
-		</nav>
-	</article>
+	<nav class="navigation">
+		<a class="navigation__link">Installation</a>
+		<a class="navigation__link">Usage</a>
+		<a class="navigation__link">Compability</a>
+		<a class="navigation__link">Options</a>
+		<a class="navigation__link">Demo</a>
+	</nav>
+
+	<!-- HEADER -->
+	<section class="section-header">
+		<div class="section-header__logo-container">
+			<img class="section-header__logo" src="front/bulb.svg" />
+			<h1 class="section-header__title">Lumens</h1>
+		</div>
+		<span class="section-header__subtitle">Tiny vanilla JavaScript carousel</span>
+		<hr />
+		<p class="section-header__intro">Lumens is a lightweight JavaScript slideshow which works without any dependencies like JQuery or other bloated libraries. It doesn't rely on a own CSS so you have nothing messing with your personal styling.</p>
+		<p class="section-header__intro">Lumens was built for developers. It doesn't add any navigation or pagination but gives you all the tools to add them yourself. This way you have full control over what happens, and when it does so.</p>
+	</section>
+
+	<!-- INSTALLATION -->
+	<section class="section-installation navigation-scroll" id="installation">
+		<h2 class="heading-secondary heading-secondary--no-margin-top">Installation</h2>
+		<hr />
+
+		<h3 class="heading-tertiary">Download and include</h3>
+		<p>Installing Lumens is as easy as it gets. Just download the compiled javascript <a href="https://github.com/Juggern4ut/lumens/blob/master/dist/lumens.js">here</a></p>
+		<p>Now import the script in the head of your HTML like usual.</p>
+		<pre class="language-html"><code class="language-html">&lt;script src="path/to/lumens.js"&gt;&lt;/script&gt;</pre></code>
+		
+		<h3 class="heading-tertiary">CDN</h3>
+		<p>If you prefer to use a CDN you can use the following link. Make sure to add the version if you don't want to update automatically. (Strongly recommended)</p>
+		<code class="inline-code">https://cdn.jsdelivr.net/gh/juggern4ut/lumens/dist/lumens.js</code>
+	</section>
+
+	<!-- SETUP -->
+	<section class="section-setup navigation-scroll" id="setup">
+		<h2 class="heading-secondary">Usage</h2>
+		<hr />
+		<h3 class="heading-tertiary">HTML</h3>
+		<p>After installing Lumens, all you have to do for the markup, is create a html-element and add a child for each slide you'll need in your Slider.</p>
+
+		<pre class="language-html"><code class="language-html">&lt;div id="myLumens"&gt;
+	&lt;div&gt;Slide 1&lt;/div&gt;
+	&lt;div&gt;Slide 2&lt;/div&gt;
+	&lt;div&gt;Slide 3&lt;/div&gt;
+	&lt;div&gt;Slide 4&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+			<h3 class="heading-tertiary">JavaScript</h3>
+			<p>Now just create a new Lumens Object and you're all set.</p>
+
+<pre class="language-js"><code class="language-js">new Lumens("#myLumens", {
+	//OPTIONS
+	slidesPerPage: 2,
+	autoplay: 1000
+})</code></pre>
+
+
+	</section>
 
 	<!--COMPABILITY-->
-	<article id="compability">
-		<h2>Compability</h2>
+	<section class="section-compability navigation-scroll" id="compability">
+		<h2 class="heading-secondary">Compability</h2>
+		<hr />
 		<p>Since there are a brazillion possible combinations on devices, operating systems, browsers and versions, Lumens tries to be as compatible as possible with all of them. 
-			It uses very basic vanilla JavaScript even Internet Explorer 9 can handle. (Amazing, I know).</p>
+			It uses very basic vanilla JavaScript that even Internet Explorer 9 can handle. (Amazing, I know).</p>
 		<p>Lumens supports the most commen Browsers which include:</p>
 		<ul>
 			<li>Google Chrome</li>
@@ -58,51 +92,66 @@
 		</ul>
 
 		<p>For a detailed list, you can check out <a href="https://docs.google.com/spreadsheets/d/1eUDNPch8Y_K6fcRfYqEpRuqZ_FaKXpu3oJ_yJf77-lw/edit?usp=sharing" target="_blank">this Sheet</a> containing all the tests Lumens went through</p>
-	</article>
+	</section>
 
 	<!--OPTIONS-->
-	<article id="options">
-		<h2>Options</h2>
-		<p>Like every slideshow ever in the existence of the internet, Lumens also comes with a bunch of options you can set (if you feel like it). To configure your experience </p>
-		<p>Following is a list of all the possible options you can set with their default values:</p>
-	
-<pre class="language-js"><code class="language-js">var defaultOptions = {
-	slidesPerPage: 1, //How much slides are shown per page
-	margin: 0, //The margin each slides has left and right in Pixels
-	duration: 200, //Duration of the slide-animation in milliseconds
-	easing: "ease-out", //The easing function used for transitions
-	autoplay: false, //Duration between each slide in milliseconds
-	draggable: true, //If false, the slides can no longer be dragged
-	threshold: 20, //Minimum dragging-distance to change slide
-	arrowControls: false, //Enable to allow controling slideshow by arrow-keys
-	mouseButton: false, //Set to 0, 1 or 2 to define which mousebutton is needed to swipe
-	preventClickDistance: 50, //Minimum dragging-distance to prevent clicks on slide
-	responsive: [], //Object containing settings and breakpoints for responsive behaviour
-	noOuterMargin: false, //Increase the width of the slideshow to compensate slide-margin
-	startAtPage: 0, //The slide on which to start (Starts with 0)
-	infinite: false //Set true to let the slideshow loop
-}</code></pre>
-	</article>
+	<section class="section-options navigation-scroll" id="options">
+		<h2 class="heading-secondary">Options</h2>
+		<hr />
+		<p>Like every slideshow ever in the existence of the internet, Lumens also comes with a bunch of options you can set (if you feel like it).</p>
 
-	<!--INSTALLATION-->
-	<article id="installation">
-		<h2>Installation</h2>
-		<p>Installing Lumens is as easy as it gets. Just download the compiled javascript <a href="https://github.com/Juggern4ut/lumens/blob/master/dist/lumens.js">here</a>, or if you want to use a CDN you can include Lumens with the following URL</p>
-		<pre class="language-url"><code>https://cdn.jsdelivr.net/gh/juggern4ut/lumens/dist/lumens.js</code></pre>
-		<p>Now import the script in the head of your HTML like always, and you'll be all set.</p>
-		<pre class="language-html"><code>&lt;script src="path/to/lumens.js"&gt;&lt;/script&gt;</code></pre>
-		<p>Now just generate a HTML-Container which contains a child for each slide you want.</p>
-	</article>
+		<code class="inline-code inline-code--narrow">slidesPerPage (number = 1)</code>
+		<p>Defines how much slides are shown per page. If this is not a whole number, it will be rounded. Enable warnings to get notified about this happening.</p>
+
+		<code class="inline-code inline-code--narrow">margin (number = 0)</code>
+		<p>Defines how much margin each slide should have on the left and right.</p>
+
+		<code class="inline-code inline-code--narrow">duration (number = 200)</code>
+		<p>Defines how fast the animation to switch slides will take in milliseconds.</p>
+
+		<code class="inline-code inline-code--narrow">easing (String = "ease-out")</code>
+		<p>The easing function used for transitions.</p>
+
+		<code class="inline-code inline-code--narrow">autoplay ({Boolean, Number} = false)</code>
+		<p>If set to a number will start an interval in set milliseconds until the slider goes to the next slide.</p>
+
+		<code class="inline-code inline-code--narrow">draggable (Boolean = true)</code>
+		<p>If this is set to false, the slide will no longer be draggable by mouse or touch</p>
+		
+		<code class="inline-code inline-code--narrow">threshold (Number = 20)</code>
+		<p>Minimum dragging-distance in pixels to change slide</p>
+
+		<code class="inline-code inline-code--narrow">arrowControls (Boolean = false)</code>
+		<p>If set to true, the user can change slides using the arrow-keys on the keyboard. Does not affect touch devices.</p>
+
+		<code class="inline-code inline-code--narrow">mouseButton ({Boolean, Number} = false)</code>
+		<p>If set to 0, 1 or 2 the user can only drag the slider using this mouse-button. 0 = Left, 1 = Middle, 2 = Right. Does not affet touch devices.</p>
+		
+		<code class="inline-code inline-code--narrow">preventClickDistance (Number = 20)</code>
+		<p>If the user drags more pixels than set here, the click-event on the slide will be prevented. Strongly recommended to keep the same as the threshold.</p>
+		
+		<code class="inline-code inline-code--narrow">responsive (Array = [])</code>
+		<p>Can be used to set several Breakpoints with different settings. Check out the demo for further instructions.</p>
+
+		<code class="inline-code inline-code--narrow">startAtPage (Number = 0)</code>
+		<p>The slideshow will initialize on the defined Page. Note that this will not alter the order of pages but rather just start at the given page.</p>
+
+		<code class="inline-code inline-code--narrow">infinite (Boolean = false)</code>
+		<p>If this is set to true, the slideshow will loop and start again from the beginning if you scroll further at the end.</p>
+	
+	</section>
 	
 	<!--EXAMPLES-->
-	<article>
-		<h2 id="examples">Examples</h2>
+	<section class="demo navigation-scroll" id="demo">
+		<h2 class="heading-secondary">Demos</h2>
+		<hr />
 		<p>Sounds all fine and dandy, but I'm sure you want to look at some examples first, to see if Lumens is the right thing for you. So here you go:</p>
-	</article>
+	</section>
 
+	<!-- Default Slider -->
 	<section class="container">
 		<article>
-			<h2 class="heading-secondary">Normal slider</h2>
+			<h2 class="heading-secondary heading-secondary--no-margin-top">Normal slider</h2>
 			<p>A very basic slider, with no configuration. It doesn't get more simple than that. Just drag the slider to... well, slide.</p>
 
 			<div class="defaultslider">
@@ -117,9 +166,10 @@
 		</article>
 	</section>
 
+	<!-- Infinite loop -->
 	<section class="container">
 		<article>
-			<h2 class="heading-secondary">Infinite Loop</h2>
+			<h2 class="heading-secondary heading-secondary--no-margin-top">Infinite Loop</h2>
 			<p>Swipe me as long as you want, you'll never reach an end.</p>
 		
 			<div class="infiniteslider">
@@ -137,9 +187,10 @@
 		</article>
 	</section>
 
+	<!-- Autoplay -->
 	<section class="container">
 		<article>
-			<h2 class="heading-secondary">Autoplay</h2>
+			<h2 class="heading-secondary heading-secondary--no-margin-top">Autoplay</h2>
 			<p>Will change slides in a configurable interval. When dragging the interval will be paused. (duh)</p>
 		
 			<div class="autoplayslider">
@@ -156,9 +207,10 @@
 	</article>
 	</section>
 
+	<!-- Prevent Click -->
 	<section class="container">
 		<article>
-			<h2 class="heading-secondary">Prevent click</h2>
+			<h2 class="heading-secondary heading-secondary--no-margin-top">Prevent click</h2>
 			<p>In this example the slides contain a Link. If you drag them, the click will not be triggered.</p>
 			<div class="productslider">
 				<div><a target="_blank" href="https://placekitten.com">Slide 1</a></div>
@@ -167,15 +219,44 @@
 				<div><a target="_blank" href="https://placekitten.com">Slide 4</a></div>
 				<div><a target="_blank" href="https://placekitten.com">Slide 5</a></div>
 			</div>
-	<pre class="language-js"><code class="language-js">var preventclick = new Lumens(".preventclick", {
-		preventClickDistance: 50
-	})</code></pre>
+<pre class="language-js"><code class="language-js">var preventclick = new Lumens(".preventclick", {
+	preventClickDistance: 50
+})</code></pre>
+		</article>
+	</section>
+
+	<!-- Responsive Click -->
+	<section class="container">
+		<article>
+			<h2 class="heading-secondary heading-secondary--no-margin-top">Responsive</h2>
+			<p>Using the "responsive"-Options you can define different settings for different screensizes.</p>
+			<div class="responsiveslider">
+				<div>Slide 1</div>
+				<div>Slide 2</div>
+				<div>Slide 3</div>
+				<div>Slide 4</div>
+				<div>Slide 5</div>
+				<div>Slide 6</div>
+			</div>
+<pre class="language-js"><code class="language-js">var responsiveslider = new Lumens(".responsiveslider", {
+	slidesPerPage: 2,
+	margin: 10,
+	responsive: [
+		{
+			breakpoint: 1024,
+			settings: {
+				slidesPerPage: 1
+			}
+		}
+	]
+})</code></pre>
 		</article>
 	</section>
 	
+	<!-- Callbacks -->
 	<section class="container">
 		<article>
-			<h2 class="heading-secondary">Callbacks</h2>
+			<h2 class="heading-secondary heading-secondary--no-margin-top">Callbacks</h2>
 			<p>Lumens provides you with callback functions for changing slides or changing the breakpoints during resizing.</p><p>Try swiping and resizing the window (below 1024px) to trigger callbacks.</p>
 			
 			<div class="callbackslider">
@@ -188,17 +269,7 @@
 
 			<p id="callback">&nbsp;</p>
 		
-<pre class="language-js"><code class="language-js">var callbackslider = new Lumens(".callbackslider", {
-	slidesPerPage: 2,
-	responsive: [
-	{
-		breakpoint: 1024,
-		settings: {
-			slidesPerPage: 1
-		}
-	}
-	]
-})
+<pre class="language-js"><code class="language-js">var callbackslider = new Lumens(".callbackslider")
 
 callbackslider.changed(() => {
 	//SLIDE CHANGED
@@ -211,10 +282,11 @@ callbackslider.resize(() => {
 	</article>
 	</section>
 
+	<!-- API -->
 	<section class="container">
-	<article>
-		<h2 class="heading-secondary">API</h2>
-		<p>Use the given functions to control how the slideshow acts just as you want it to</p>
+		<article>
+		<h2 class="heading-secondary heading-secondary--no-margin-top">Functions</h2>
+		<p>Use the given functions to control slideshow just as you want it to</p>
 		
 		<div class="apislider">
 			<div>Slide 1</div>
@@ -240,9 +312,10 @@ document.getElementById("prev").addEventListener("click", () => {
 		</article>
 	</section>
 
+	<!-- Arrow Keys -->
 	<section class="container">
 		<article>
-			<h2 class="heading-secondary">Arrow-keys</h2>
+			<h2 class="heading-secondary heading-secondary--no-margin-top">Arrow-keys</h2>
 			<p>You can also configure the slideshow to be swipeable using the arrow-keys.</p>
 
 			<div class="arrowslider">

@@ -7,9 +7,9 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+cli
  */
 code[class*="language-"],
 pre[class*="language-"] {
-  color: #ccc;
+  color: #333;
   background: none;
-  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
   font-size: 1em;
   text-align: left;
   white-space: pre;
@@ -27,18 +27,21 @@ pre[class*="language-"] {
 
 /* Code blocks */
 pre[class*="language-"] {
-  padding: 1em;
-  margin: .5em 0;
-  overflow: auto; }
+  background-color: #f6f6f6;
+  border: 1px solid #dadada;
+  border-radius: 3px;
+  padding: 2px 5px;
+  font-size: 1.46rem;
+  overflow-x: auto; }
 
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
-  background: #2d2d2d; }
+  background: #f6f6f6; }
 
 /* Inline code */
 :not(pre) > code[class*="language-"] {
-  padding: .1em;
-  border-radius: .3em;
+  padding: 0.1em;
+  border-radius: 0.3em;
   white-space: normal; }
 
 .token.comment,
@@ -46,16 +49,17 @@ pre[class*="language-"] {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  color: #999; }
+  color: #3cbb58;
+  font-style: italic; }
 
 .token.punctuation {
-  color: #ccc; }
+  color: #333; }
 
 .token.tag,
 .token.attr-name,
 .token.namespace,
 .token.deleted {
-  color: #e2777a; }
+  color: #e01e5a; }
 
 .token.function-name {
   color: #6196cc; }
@@ -69,21 +73,21 @@ pre[class*="language-"] {
 .token.class-name,
 .token.constant,
 .token.symbol {
-  color: #f8c555; }
+  color: #d29207; }
 
 .token.selector,
 .token.important,
 .token.atrule,
 .token.keyword,
 .token.builtin {
-  color: #cc99cd; }
+  color: #c42cd6; }
 
 .token.string,
 .token.char,
 .token.attr-value,
 .token.regex,
 .token.variable {
-  color: #7ec699; }
+  color: #179215; }
 
 .token.operator,
 .token.entity,
@@ -106,29 +110,120 @@ pre[class*="language-"] {
 html {
   font-size: 62.5%; }
 
-#warning {
-  background-color: #b54c4c;
-  font-weight: 500;
+section {
+  width: 55rem;
+  margin: 0 auto; }
+
+hr {
+  width: 12rem;
+  height: 1px;
+  display: block;
+  margin: 4rem auto;
+  background-color: #fff;
+  border: none; }
+
+.heading-secondary {
+  font-size: 3rem;
   text-align: center;
-  padding: 2rem 8rem 2rem 8rem;
-  background-image: url(../front/roadwork.png);
-  background-repeat: no-repeat;
-  background-size: 5rem;
-  background-position: 1rem center; }
-  #warning p {
-    margin-top: 0; }
+  margin-top: 4rem !important; }
+  .heading-secondary--no-margin-top {
+    margin-top: 0 !important; }
 
-h1:first-child,
-h2:first-child,
-p:first-child,
-nav:first-child {
-  margin-top: 1.5rem; }
+.heading-tertiary {
+  font-weight: 500; }
 
-h1:not(:last-child),
-h2:not(:last-child),
-p:not(:last-child),
-nav:not(:last-child) {
-  margin-bottom: 1.5rem; }
+.inline-code {
+  color: #e01e5a;
+  background-color: #f6f6f6;
+  border: 1px solid #dadada;
+  border-radius: 3px;
+  padding: 2px 5px;
+  font-family: monospace;
+  display: inline-block;
+  line-height: 1.5;
+  width: 100%; }
+  .inline-code--narrow {
+    width: auto; }
+
+.section-header {
+  text-align: center;
+  padding-top: 4rem;
+  min-height: 100vh;
+  position: relative; }
+  .section-header__logo-container {
+    margin: 0 auto 4rem;
+    width: 20rem;
+    border: 6px solid #fff;
+    padding: 2rem; }
+  .section-header__title {
+    font-size: 4rem; }
+  .section-header__subtitle {
+    font-size: 2.6rem;
+    font-weight: 100; }
+  .section-header__intro {
+    text-align: justify; }
+  .section-header::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2.1rem;
+    height: 1.2rem;
+    background-image: url("../front/arrow_down.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center; }
+
+.navigation {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 1rem;
+  text-align: right; }
+  .navigation__link {
+    display: block;
+    position: relative;
+    padding-right: 2rem;
+    color: #fff;
+    cursor: pointer;
+    margin: 1rem 0; }
+    .navigation__link::after {
+      content: " ";
+      display: block;
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border: 1px solid #fff;
+      border-radius: 50%;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%); }
+    .navigation__link--active::after {
+      background-color: #fff; }
+
+h1,
+h2,
+p,
+nav,
+code,
+pre {
+  margin: 0; }
+  h1:first-child,
+  h2:first-child,
+  p:first-child,
+  nav:first-child,
+  code:first-child,
+  pre:first-child {
+    margin-top: 1.5rem; }
+  h1:not(:last-child),
+  h2:not(:last-child),
+  p:not(:last-child),
+  nav:not(:last-child),
+  code:not(:last-child),
+  pre:not(:last-child) {
+    margin-bottom: 1.5rem; }
 
 p {
   line-height: 3rem; }
@@ -175,9 +270,6 @@ article {
   text-align: justify;
   margin: 0 auto; }
 
-.heading-secondary {
-  font-size: 2.8rem; }
-
 h1,
 h2,
 h3,
@@ -193,15 +285,12 @@ h4 {
   .title__secondary {
     font-size: 3rem;
     display: block; }
-  .title hr {
-    width: 100px;
-    display: inline-block; }
 
 .container {
   background-color: #3d4d65;
   text-align: center;
   padding: 2rem 0;
-  margin-bottom: 5rem; }
+  margin: 2.5rem auto; }
   .container > p {
     margin: 1rem auto;
     max-width: 35rem; }
@@ -221,7 +310,8 @@ code {
 .apislider,
 .productslider,
 .infiniteslider,
-.arrowslider {
+.arrowslider,
+.responsiveslider {
   width: 100%;
   margin: 0 auto;
   text-align: center; }
@@ -231,7 +321,8 @@ code {
   .apislider .lumens__slide,
   .productslider .lumens__slide,
   .infiniteslider .lumens__slide,
-  .arrowslider .lumens__slide {
+  .arrowslider .lumens__slide,
+  .responsiveslider .lumens__slide {
     height: 15rem;
     background-color: #fff;
     color: #333;
@@ -243,8 +334,14 @@ code {
     .apislider .lumens__slide a,
     .productslider .lumens__slide a,
     .infiniteslider .lumens__slide a,
-    .arrowslider .lumens__slide a {
+    .arrowslider .lumens__slide a,
+    .responsiveslider .lumens__slide a {
       color: #1a0dab; }
+
+.responsiveslider {
+  width: calc(100% + 20px);
+  position: relative;
+  right: 10px; }
 
 .container button {
   border: 0;
@@ -254,7 +351,7 @@ code {
   padding: 1.6rem;
   width: 10rem;
   outline: none;
-  margin: 1rem;
+  margin: 1rem 1rem 0 0;
   transition: 200ms ease-out; }
   .container button:hover {
     background-color: #1894e7; }

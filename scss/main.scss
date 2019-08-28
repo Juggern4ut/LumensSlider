@@ -4,25 +4,136 @@ html {
   font-size: 62.5%;
 }
 
-#warning {
-  background-color: #b54c4c;
-  font-weight: 500;
-  text-align: center;
-  padding: 2rem 8rem 2rem 8rem;
-  background-image: url(../front/roadwork.png);
-  background-repeat: no-repeat;
-  background-size: 5rem;
-  background-position: 1rem center;
+section {
+  width: 55rem;
+  margin: 0 auto;
+}
 
-  p {
-    margin-top: 0;
+hr {
+  width: 12rem;
+  height: 1px;
+  display: block;
+  margin: 4rem auto;
+  background-color: #fff;
+  border: none;
+}
+
+.heading-secondary {
+  font-size: 3rem;
+  text-align: center;
+  margin-top: 4rem !important;
+  &--no-margin-top {
+    margin-top: 0 !important;
   }
 }
+
+.heading-tertiary {
+  font-weight: 500;
+}
+
+.inline-code {
+  color: #e01e5a;
+  background-color: #f6f6f6;
+  border: 1px solid #dadada;
+  border-radius: 3px;
+  padding: 2px 5px;
+  font-family: monospace;
+  display: inline-block;
+  line-height: 1.5;
+  width: 100%;
+
+  &--narrow {
+    width: auto;
+  }
+}
+
+.section-header {
+  text-align: center;
+  padding-top: 4rem;
+  min-height: 100vh;
+  position: relative;
+
+  &__logo-container {
+    margin: 0 auto 4rem;
+    width: 20rem;
+    border: 6px solid #fff;
+    padding: 2rem;
+  }
+
+  &__title {
+    font-size: 4rem;
+  }
+
+  &__subtitle {
+    font-size: 2.6rem;
+    font-weight: 100;
+  }
+
+  &__intro {
+    text-align: justify;
+  }
+
+  &::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2.1rem;
+    height: 1.2rem;
+    background-image: url("../front/arrow_down.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+.navigation {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 1rem;
+  text-align: right;
+
+  &__link {
+    display: block;
+    position: relative;
+    padding-right: 2rem;
+    color: #fff;
+    cursor: pointer;
+    margin: 1rem 0;
+
+    &::after {
+      content: " ";
+      display: block;
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border: 1px solid #fff;
+      border-radius: 50%;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+    }
+
+    &--active{
+      &::after{
+        background-color: #fff;
+      }
+    }
+  }
+}
+
 
 h1,
 h2,
 p,
-nav {
+nav,
+code,
+pre {
+  margin: 0;
+
   &:first-child {
     margin-top: 1.5rem;
   }
@@ -91,10 +202,6 @@ article {
   margin: 0 auto;
 }
 
-.heading-secondary {
-  font-size: 2.8rem;
-}
-
 h1,
 h2,
 h3,
@@ -115,18 +222,13 @@ h4 {
     font-size: 3rem;
     display: block;
   }
-
-  hr {
-    width: 100px;
-    display: inline-block;
-  }
 }
 
 .container {
   background-color: #3d4d65;
   text-align: center;
   padding: 2rem 0;
-  margin-bottom: 5rem;
+  margin: 2.5rem auto;
 
   > p {
     margin: 1rem auto;
@@ -151,7 +253,8 @@ code {
 .apislider,
 .productslider,
 .infiniteslider,
-.arrowslider {
+.arrowslider,
+.responsiveslider {
   width: 100%;
   margin: 0 auto;
   text-align: center;
@@ -169,6 +272,12 @@ code {
   }
 }
 
+.responsiveslider {
+  width: calc(100% + 20px);
+  position: relative;
+  right: 10px;
+}
+
 .container button {
   border: 0;
   background-color: #0081d5;
@@ -177,7 +286,7 @@ code {
   padding: 1.6rem;
   width: 10rem;
   outline: none;
-  margin: 1rem;
+  margin: 1rem 1rem 0 0;
   transition: 200ms ease-out;
 
   &:hover {
