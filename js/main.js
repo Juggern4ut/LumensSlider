@@ -64,21 +64,24 @@ let initSliders = () => {
     infinite: true
   })
 
-  window.callbackslider = new Lumens(".callbackslider")
+  window.callbackslider = new Lumens(".callbackslider", {
+    duration: 1000
+  })
 
-  window.callbackslider.changed(() => {
+  window.callbackslider.beforeChange(() => {
+    document.getElementById("callback").innerHTML = "Change started!"
+    setTimeout(() => {
+      document.getElementById("callback").innerHTML = "&nbsp;"
+    }, 300)
+  })
+
+  window.callbackslider.afterChange(() => {
     document.getElementById("callback").innerHTML = "Slide Changed!"
     setTimeout(() => {
       document.getElementById("callback").innerHTML = "&nbsp;"
     }, 500)
   })
 
-  window.callbackslider.resize(() => {
-    document.getElementById("callback").innerHTML = "New Breakpoint reached"
-    setTimeout(() => {
-      document.getElementById("callback").innerHTML = "&nbsp;"
-    }, 1000)
-  })
 
   window.apislider = new Lumens(".apislider", {
     draggable: false

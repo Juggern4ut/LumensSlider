@@ -297,7 +297,11 @@
 		
 <pre class="language-js"><code class="language-js">var callbackslider = new Lumens(".callbackslider")
 
-callbackslider.changed(() => {
+callbackslider.beforeChange(() => {
+	//SLIDE CHANGE BEGAN
+})
+
+callbackslider.afterChange(() => {
 	//SLIDE CHANGED
 })
 

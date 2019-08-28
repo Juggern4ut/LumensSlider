@@ -322,7 +322,10 @@ export default class Lumens {
     this.currentPage = page
 
     if (triggerChange) {
-      this.changeCallback()
+      this.beforeChangeCallback()
+      setTimeout(() => {
+        this.afterChangeCallback()
+      }, this.duration)
 
       if (this.infinite) {
         if (this.currentPage === 0) {
@@ -367,11 +370,19 @@ export default class Lumens {
   }
 
   /**
-   * Sets the callback for changing slides
-   * @param {function} callback Will be called when the slides change
+   * Sets the callback called before changing slides
+   * @param {function} callback Will be called before the slides change
    */
-  changed(callback) {
-    this.changeCallback = callback
+  beforeChange(callback) {
+    this.beforeChangeCallback = callback
+  }
+
+  /**
+   * Sets the callback called after changing slides
+   * @param {function} callback Will be called after the slides have changed
+   */
+  afterChange(callback) {
+    this.afterChangeCallback = callback
   }
 
   /**
@@ -415,7 +426,8 @@ export default class Lumens {
     this.noOuterMargin = false
     this.startAtPage = 0
     this.infinite = false
-    this.changeCallback = () => {}
+    this.afterChangeCallback = () => {}
+    this.beforeChangeCallback = () => {}
     this.resizeCallback = () => {}
 
     this.dotNavigation = false
