@@ -11,10 +11,9 @@ window.addEventListener("load", () => {
 
   window.preventclick = new Lumens(".productslider", {
     preventClickDistance: 50,
-    dotNavigation: true
   })
 
-  window.preventclick = new Lumens(".infiniteslider", {
+  window.infiniteslider = new Lumens(".infiniteslider", {
     infinite: true
   })
 

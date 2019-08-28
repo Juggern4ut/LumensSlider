@@ -76,13 +76,16 @@ export default class Lumens {
       this.track.after(this.dotnav)
       for (let i = 0; i < this.dotamount; i++) {
         let dot = document.createElement("div")
-        dot.className = "lumens__dot"
-        dot.style.width = this.dotnavSize+"px"
-        dot.style.height = this.dotnavSize+"px"
-        dot.style.borderRadius = this.dotnavBorderRadius
-        dot.style.display = "inline-block"
-        dot.style.margin = "0 " + this.dotMargin + "px"
-        dot.style.border = this.dotnavBorder
+        dot.className = this.dotnavStyling.className
+        if (!this.dotnavStyling.ownStyle) {
+          console.log(this.dotnavStyling)
+          dot.style.width = this.dotnavStyling.size + "px"
+          dot.style.height = this.dotnavStyling.size + "px"
+          dot.style.borderRadius = this.dotnavStyling.borderRadius
+          dot.style.display = "inline-block"
+          dot.style.margin = "0 " + this.dotnavStyling.margin + "px"
+          dot.style.border = this.dotnavStyling.border
+        }
 
         this.dotnav.append(dot)
         dot.addEventListener("click", () => {
@@ -92,20 +95,27 @@ export default class Lumens {
     }
   }
 
+  /**
+   * Will calculate the currently active dot and add a new classname to it.
+   * Will then (if custom styling is not turned on) style the in-/active dots
+   * @returns {void}
+   */
   activateDot() {
     if (this.dotNavigation) {
       let dotIndex = Math.floor(this.currentPage / this.slidesPerPage)
-      this.dotnav.querySelectorAll(".lumens__dot").forEach((tmp, index) => {
-        tmp.className = index === dotIndex ? "lumens__dot lumens__dot--active" : "lumens__dot"
+      this.dotnav.querySelectorAll("." + this.dotnavStyling.className).forEach((tmp, index) => {
+        tmp.className = index === dotIndex ? this.dotnavStyling.className + " " + this.dotnavStyling.className + "--active" : this.dotnavStyling.className
       })
 
-      document.querySelectorAll(".lumens__dot").forEach(tmp => {
-        if (tmp.className.includes("lumens__dot--active")) {
-          tmp.style.backgroundColor = this.dotActiveColor
-        } else {
-          tmp.style.backgroundColor = this.dotInactiveColor
-        }
-      })
+      if (!this.dotnavStyling.ownStyle) {
+        document.querySelectorAll("." + this.dotnavStyling.className).forEach(tmp => {
+          if (tmp.className.includes(this.dotnavStyling.className + "--active")) {
+            tmp.style.backgroundColor = this.dotnavStyling.activeColor
+          } else {
+            tmp.style.backgroundColor = this.dotnavStyling.inactiveColor
+          }
+        })
+      }
     }
   }
 
@@ -398,7 +408,6 @@ export default class Lumens {
     this.autoplayFunction = undefined
     this.draggable = true
     this.threshold = 20
-    this.dotNavigation = false
     this.arrowControls = false
     this.mouseButton = false
     this.preventClickDistance = 20
@@ -409,12 +418,17 @@ export default class Lumens {
     this.changeCallback = () => {}
     this.resizeCallback = () => {}
 
-    this.dotnavSize = 10
-    this.dotnavBorder = "1px solid #999"
-    this.dotMargin = 10
-    this.dotActiveColor = "#fff"
-    this.dotInactiveColor = "transparent"
-    this.dotnavBorderRadius = "50%"
+    this.dotNavigation = false
+    this.dotnavStyling = {
+      ownStyle: false,
+      className: "lumens__dot",
+      size: 10,
+      border: "1px solid #999",
+      margin: 10,
+      activeColor: "#fff",
+      inactiveColor: "transparent",
+      borderRadius: "50%"
+    }
 
     this.isDragging = false
     this.xDragStart = 0
@@ -448,9 +462,25 @@ export default class Lumens {
    * @returns {void}
    */
   updateSettings(options) {
+    if (options && !Number.isInteger(options.slidesPerPage)) {
+      this.warn(`Option 'slidesPerPage' has to be a whole number. The given ${options.slidesPerPage} was rounded to ${Math.round(options.slidesPerPage)}`)
+      if (options.slidesPerPage) {
+        options.slidesPerPage = Math.round(options.slidesPerPage)
+      }
+    }
+
     for (var key in options) {
       if (options.hasOwnProperty(key)) {
-        this[key] = options[key]
+        if (typeof options[key] === "object") {
+          var suboptions = options[key]
+          for (var subkey in suboptions) {
+            if (suboptions.hasOwnProperty(subkey)) {
+              this[key][subkey] = suboptions[subkey]
+            }
+          }
+        } else {
+          this[key] = options[key]
+        }
       }
     }
   }
