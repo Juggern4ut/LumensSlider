@@ -89,6 +89,11 @@ hr {
   }
 }
 
+p#callback {
+  text-align: center;
+  margin: 1rem 1rem 0 1rem;
+}
+
 .navigation {
   position: fixed;
   top: 50%;
@@ -117,14 +122,13 @@ hr {
       transform: translateY(-50%);
     }
 
-    &--active{
-      &::after{
+    &--active {
+      &::after {
         background-color: #fff;
       }
     }
   }
 }
-
 
 h1,
 h2,
@@ -261,13 +265,25 @@ code {
 
   .lumens__slide {
     height: 15rem;
-    background-color: #fff;
     color: #333;
+    background-color: #2b333f;
     line-height: 15rem;
     font-size: 5rem;
 
+    svg{
+      height: 13rem;
+      margin-top: 1rem;
+    }
+
+    &:nth-child(odd){
+      background-color: #fff;
+      a {
+        color: #1a0dab;
+      }
+    }
+
     a {
-      color: #1a0dab;
+      color: #eee;
     }
   }
 }

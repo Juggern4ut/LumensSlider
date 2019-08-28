@@ -176,6 +176,10 @@ hr {
     background-size: cover;
     background-position: center; }
 
+p#callback {
+  text-align: center;
+  margin: 1rem 1rem 0 1rem; }
+
 .navigation {
   position: fixed;
   top: 50%;
@@ -324,10 +328,38 @@ code {
   .arrowslider .lumens__slide,
   .responsiveslider .lumens__slide {
     height: 15rem;
-    background-color: #fff;
     color: #333;
+    background-color: #2b333f;
     line-height: 15rem;
     font-size: 5rem; }
+    .defaultslider .lumens__slide svg,
+    .autoplayslider .lumens__slide svg,
+    .callbackslider .lumens__slide svg,
+    .apislider .lumens__slide svg,
+    .productslider .lumens__slide svg,
+    .infiniteslider .lumens__slide svg,
+    .arrowslider .lumens__slide svg,
+    .responsiveslider .lumens__slide svg {
+      height: 13rem;
+      margin-top: 1rem; }
+    .defaultslider .lumens__slide:nth-child(odd),
+    .autoplayslider .lumens__slide:nth-child(odd),
+    .callbackslider .lumens__slide:nth-child(odd),
+    .apislider .lumens__slide:nth-child(odd),
+    .productslider .lumens__slide:nth-child(odd),
+    .infiniteslider .lumens__slide:nth-child(odd),
+    .arrowslider .lumens__slide:nth-child(odd),
+    .responsiveslider .lumens__slide:nth-child(odd) {
+      background-color: #fff; }
+      .defaultslider .lumens__slide:nth-child(odd) a,
+      .autoplayslider .lumens__slide:nth-child(odd) a,
+      .callbackslider .lumens__slide:nth-child(odd) a,
+      .apislider .lumens__slide:nth-child(odd) a,
+      .productslider .lumens__slide:nth-child(odd) a,
+      .infiniteslider .lumens__slide:nth-child(odd) a,
+      .arrowslider .lumens__slide:nth-child(odd) a,
+      .responsiveslider .lumens__slide:nth-child(odd) a {
+        color: #1a0dab; }
     .defaultslider .lumens__slide a,
     .autoplayslider .lumens__slide a,
     .callbackslider .lumens__slide a,
@@ -336,7 +368,7 @@ code {
     .infiniteslider .lumens__slide a,
     .arrowslider .lumens__slide a,
     .responsiveslider .lumens__slide a {
-      color: #1a0dab; }
+      color: #eee; }
 
 .responsiveslider {
   width: calc(100% + 20px);
