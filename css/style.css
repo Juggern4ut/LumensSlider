@@ -308,6 +308,9 @@ code {
   text-align: inherit;
   font-family: "consolas"; }
 
+.hr--left {
+  margin: 4rem 0 4rem 0; }
+
 .defaultslider,
 .autoplayslider,
 .callbackslider,

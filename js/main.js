@@ -82,7 +82,6 @@ let initSliders = () => {
     }, 500)
   })
 
-
   window.apislider = new Lumens(".apislider", {
     draggable: false
   })

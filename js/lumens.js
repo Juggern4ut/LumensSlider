@@ -206,6 +206,7 @@ export default class Lumens {
       this.isDragging = true
       this.disableTransition()
       this.xDragStart = e.type === "touchstart" ? e.touches[0].pageX : e.pageX
+      this.beforeDraggingCallback()
     }
 
     var mouseUp = e => {
@@ -228,6 +229,7 @@ export default class Lumens {
 
       this.initAutoplay()
       this.isDragging = false
+      this.afterDraggingCallback()
     }
 
     var mouseMove = e => {
@@ -242,6 +244,7 @@ export default class Lumens {
       var tmp = e.type === "touchmove" ? e.touches[0].pageX : e.pageX
 
       this.xDragDelta = tmp - this.xDragStart
+      this.draggingCallback()
       this.setTransform(this.xOffset + this.xDragDelta)
     }
 
@@ -394,6 +397,30 @@ export default class Lumens {
   }
 
   /**
+   * Sets the callback for starting dragging the slideshow
+   * @param {function} callback This will be called, when the user began to drag the slideshow
+   */
+  beforeDragging(callback) {
+    this.beforeDraggingCallback = callback
+  }
+
+  /**
+   * Sets the callback for dragging the slideshow
+   * @param {function} callback This will be called, when the slideshow is dragged
+   */
+  dragging(callback) {
+    this.draggingCallback = callback
+  }
+
+  /**
+   * Sets the callback for ending dragging the slideshow
+   * @param {function} callback This will be called, when the user stops to drag the slideshow
+   */
+  afterDragging(callback) {
+    this.afterDraggingCallback = callback
+  }
+
+  /**
    * Returns the current page according to the offset.
    * @returns {Number} The current page the slider is on
    */
@@ -429,6 +456,7 @@ export default class Lumens {
     this.afterChangeCallback = () => {}
     this.beforeChangeCallback = () => {}
     this.resizeCallback = () => {}
+    this.draggingCallback = () => {}
 
     this.dotNavigation = false
     this.dotnavStyling = {

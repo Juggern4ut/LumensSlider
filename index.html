@@ -304,12 +304,34 @@ callbackslider.beforeChange(() => {
 callbackslider.afterChange(() => {
 	//SLIDE CHANGED
 })
+</code></pre>
+			<br />
+			<p>There are also a couple of other callbacks which you can use to further customize Lumens. Check out the complete list below:</p>
 
-callbackslider.resize(() => {
-	//NEW BREAKPOINT REACHED
-})</code></pre>
+			<code class="inline-code inline-code--narrow">beforeChange</code>
+			<p>This will be called when a change in the slideshow occured, but the animation is not yet finisehd.</p>
+			<hr class="hr--left hr--small"/>
 
-	</article>
+			<code class="inline-code inline-code--narrow">afterChange</code>
+			<p>This will be called when a change in the slideshow occured, and the animation has finisehd.</p>
+			<hr class="hr--left hr--small"/>
+			
+			<code class="inline-code inline-code--narrow">beforeDragging</code>
+			<p>This will be called as soon as the user attempts to drag the slideshow. (aka "holds the mouse down")</p>
+			<hr class="hr--left hr--small"/>
+
+			<code class="inline-code inline-code--narrow">dragging</code>
+			<p>This will be called when the user drags the Slideshow around</p>
+			<hr class="hr--left hr--small"/>
+
+			<code class="inline-code inline-code--narrow">afterDragging</code>
+			<p>This will be called when the user releases the mouse or finger on the slideshow and stops dragging</p>
+			<hr class="hr--left hr--small"/>
+
+			<code class="inline-code inline-code--narrow">resize</code>
+			<p>This will be called when the user resizes the screen so that the slideshow reaches a new breakpoint and changes it's settings.</p>
+
+		</article>
 	</section>
 
 	<!-- API -->
