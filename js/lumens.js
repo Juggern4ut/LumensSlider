@@ -72,13 +72,12 @@ export default class Lumens {
       this.dotnav = document.createElement("div")
       this.dotnav.className = "lumens__dot-nav"
       this.dotnav.style.margin = "0 auto"
-      this.dotamount = Math.ceil(this.slideAmount / this.slidesPerPage)
+      this.dotamount = this.infinite ? Math.ceil((this.slideAmount - this.slidesPerPage * 2) / this.slidesPerPage) : Math.ceil(this.slideAmount / this.slidesPerPage)
       this.track.after(this.dotnav)
       for (let i = 0; i < this.dotamount; i++) {
         let dot = document.createElement("div")
         dot.className = this.dotnavStyling.className
         if (!this.dotnavStyling.ownStyle) {
-          console.log(this.dotnavStyling)
           dot.style.width = this.dotnavStyling.size + "px"
           dot.style.height = this.dotnavStyling.size + "px"
           dot.style.borderRadius = this.dotnavStyling.borderRadius
@@ -89,7 +88,11 @@ export default class Lumens {
 
         this.dotnav.append(dot)
         dot.addEventListener("click", () => {
-          this.gotoPage(i * this.slidesPerPage)
+          if (this.infinite) {
+            this.gotoPage((i + 1) * this.slidesPerPage)
+          } else {
+            this.gotoPage(i * this.slidesPerPage)
+          }
         })
       }
     }
@@ -102,7 +105,7 @@ export default class Lumens {
    */
   activateDot() {
     if (this.dotNavigation) {
-      let dotIndex = Math.floor(this.currentPage / this.slidesPerPage)
+      let dotIndex = this.infinite ? Math.floor(this.currentPage / this.slidesPerPage) - 1 : Math.floor(this.currentPage / this.slidesPerPage)
       this.dotnav.querySelectorAll("." + this.dotnavStyling.className).forEach((tmp, index) => {
         tmp.className = index === dotIndex ? this.dotnavStyling.className + " " + this.dotnavStyling.className + "--active" : this.dotnavStyling.className
       })
@@ -176,7 +179,7 @@ export default class Lumens {
 
     if (this.currentBreakpointIndex != this.oldBreakpointIndex) {
       this.oldBreakpointIndex = this.currentBreakpointIndex
-      this.resizeCallback()
+      this.changeBreakpoint()
       this.initAutoplay()
     }
   }
@@ -294,7 +297,7 @@ export default class Lumens {
         newNode.className += " lumens__slide--clone"
         this.track.prepend(newNode)
       }
-      
+
       for (let i = 0; i < this.slidesPerPage; i++) {
         var newNode = this.track.children[i + this.slidesPerPage].cloneNode(true)
         newNode.className += " lumens__slide--clone"
@@ -396,8 +399,8 @@ export default class Lumens {
    * Sets the callback for changing breakpoints
    * @param {function} callback This will be called, when another breakpoint is reached
    */
-  resize(callback) {
-    this.resizeCallback = callback
+  changeBreakpoint(callback) {
+    this.changeBreakpoint = callback
   }
 
   /**
@@ -460,7 +463,7 @@ export default class Lumens {
 
     this.afterChangeCallback = () => {}
     this.beforeChangeCallback = () => {}
-    this.resizeCallback = () => {}
+    this.changeBreakpoint = () => {}
     this.afterDraggingCallback = () => {}
     this.draggingCallback = () => {}
     this.beforeDraggingCallback = () => {}
