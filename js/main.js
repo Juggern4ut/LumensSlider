@@ -4,13 +4,15 @@ import "./prism.min"
 window.navElements = []
 window.navLinks = []
 window.addEventListener("load", () => {
+  
   window.navElements = document.querySelectorAll(".navigation-scroll")
   window.navLinks = document.querySelectorAll(".navigation__link")
 
   for (let i = 0; i < window.navLinks.length; i++) {
     const nav = window.navLinks[i]
     nav.addEventListener("click", () => {
-      window.scrollTo(0, window.navElements[i].offsetTop - 20)
+      var puffer = window.innerWidth > 850 ? 20 : 20 + document.querySelector(".navigation").clientHeight
+      window.scrollTo(0, window.navElements[i].offsetTop - puffer)
     })
   }
 
@@ -23,9 +25,10 @@ document.addEventListener("scroll", () => {
 })
 
 let getCurrentSection = () => {
+  var puffer = window.innerWidth > 850 ? 30 : 30 + document.querySelector(".navigation").clientHeight
   for (let i = window.navElements.length - 1; i >= 0; i--) {
     const nav = window.navElements[i]
-    if (nav.offsetTop - 30 < window.scrollY) {
+    if (nav.offsetTop - puffer < window.scrollY) {
       for (let j = 0; j < window.navLinks.length; j++) {
         const link = window.navLinks[j]
         link.className = "navigation__link"
