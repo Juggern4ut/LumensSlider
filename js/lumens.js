@@ -290,11 +290,15 @@ export default class Lumens {
     //CLONES
     if (this.infinite) {
       for (let i = 0; i < this.slidesPerPage; i++) {
-        this.track.prepend(this.track.children[this.track.children.length - 1 - i].cloneNode(true))
+        var newNode = this.track.children[this.track.children.length - 1 - i].cloneNode(true)
+        newNode.className += " lumens__slide--clone"
+        this.track.prepend(newNode)
       }
-
+      
       for (let i = 0; i < this.slidesPerPage; i++) {
-        this.track.append(this.track.children[i + this.slidesPerPage].cloneNode(true))
+        var newNode = this.track.children[i + this.slidesPerPage].cloneNode(true)
+        newNode.className += " lumens__slide--clone"
+        this.track.append(newNode)
       }
     }
 
@@ -453,10 +457,13 @@ export default class Lumens {
     this.noOuterMargin = false
     this.startAtPage = 0
     this.infinite = false
+
     this.afterChangeCallback = () => {}
     this.beforeChangeCallback = () => {}
     this.resizeCallback = () => {}
+    this.afterDraggingCallback = () => {}
     this.draggingCallback = () => {}
+    this.beforeDraggingCallback = () => {}
 
     this.dotNavigation = false
     this.dotnavStyling = {
