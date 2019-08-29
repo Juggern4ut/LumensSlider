@@ -154,6 +154,7 @@ hr {
   text-align: center;
   padding-top: 4rem;
   min-height: 100vh;
+  padding-bottom: 8rem;
   position: relative; }
   .section-header__logo-container {
     margin: 0 auto 4rem;
@@ -170,6 +171,9 @@ hr {
   @media (max-width: 850px) {
     .section-header {
       padding-top: 6rem; } }
+  @media (max-width: 476px) {
+    .section-header {
+      padding-top: 10rem; } }
   .section-header::after {
     content: " ";
     display: block;
@@ -215,7 +219,8 @@ p#callback {
     margin: 1rem 0; }
     @media (max-width: 850px) {
       .navigation__link {
-        display: inline-block; } }
+        display: inline-block;
+        padding: 0 1rem; } }
     .navigation__link::after {
       content: " ";
       display: block;

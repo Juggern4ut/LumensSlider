@@ -57,6 +57,7 @@ hr {
   text-align: center;
   padding-top: 4rem;
   min-height: 100vh;
+  padding-bottom: 8rem;
   position: relative;
 
   &__logo-container {
@@ -81,6 +82,10 @@ hr {
 
   @media (max-width: 850px) {
     padding-top: 6rem;
+  }
+
+  @media (max-width: 476px) {
+    padding-top: 10rem;
   }
 
   &::after {
@@ -134,6 +139,7 @@ p#callback {
 
     @media (max-width: 850px) {
       display: inline-block;
+      padding: 0 1rem;
     }
 
     &::after {
