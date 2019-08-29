@@ -91,11 +91,28 @@
 			<h3 class="heading-tertiary">JavaScript</h3>
 			<p>Now just create a new Lumens Object and you're all set.</p>
 
+<code class="inline-code">new Lumens({String, Node} selector, [{Object} options], [{Boolean} showWarnings])</code>
+
+<p>The constructor takes 3 arguments, of which the second and third one are optional. Here they are listed and documented:</p>
+
+<hr class="hr--small hr--left" />
+<code class="inline-code">selector {String, Node}</code>
+<p>A String to select the element which should be turned into a Lumens-Slider. This can also be a single node. (Nodelists are not allowed yet and will not intialize the slider)</p>
+<hr class="hr--small hr--left" />
+
+<code class="inline-code">options {Object}</code>
+<p>Optional object containing all the options the slider should handle. If you don't pass this argument, all the default-settings will be used.</p>
+<hr class="hr--small hr--left" />
+
+<code class="inline-code">showWarnings {Boolean}</code>
+<p>If this argument is set to true, the slider will throw warnings in the console to help you understand why things might not work as expected.</p>
+
+<h3 class="heading-tertiary heading-tertiary--margin">Example</h3>
 <pre class="language-js"><code class="language-js">new Lumens("#myLumens", {
 	//OPTIONS
 	slidesPerPage: 2,
 	autoplay: 1000
-})</code></pre>
+}, true)</code></pre>
 
 
 	</section>
@@ -240,7 +257,7 @@
 			<h2 class="heading-secondary heading-secondary--no-margin-top">Prevent click</h2>
 			<p>In this example the slides contain a Link. If you drag them, the click will not be triggered.</p>
 			<div class="productslider">
-				<div><a target="_blank" href="https://placekitten.com">I'm a Link</a></div>
+				<div><a target="_blank" href="https://placekitten.com">I'm a link</a></div>
 				<div><a target="_blank" href="https://placekitten.com">but actually</a></div>
 				<div><a target="_blank" href="https://placekitten.com">the proper term</a></div>
 				<div><a target="_blank" href="https://placekitten.com">is anchor</a></div>

@@ -132,6 +132,8 @@ hr {
 
 .heading-tertiary {
   font-weight: 500; }
+  .heading-tertiary--margin {
+    margin-bottom: 1rem; }
 
 .inline-code {
   color: #e01e5a;
@@ -142,8 +144,9 @@ hr {
   font-family: monospace;
   display: inline-block;
   line-height: 1.5;
-  width: 100%;
-  overflow-x: auto; }
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: nowrap; }
   .inline-code--narrow {
     width: auto; }
 

@@ -30,6 +30,9 @@ hr {
 
 .heading-tertiary {
   font-weight: 500;
+  &--margin{
+    margin-bottom: 1rem;
+  }
 }
 
 .inline-code {
@@ -41,8 +44,9 @@ hr {
   font-family: monospace;
   display: inline-block;
   line-height: 1.5;
-  width: 100%;
+  max-width: 100%;
   overflow-x: auto;
+  white-space: nowrap;
 
   &--narrow {
     width: auto;
