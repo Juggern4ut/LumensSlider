@@ -71,7 +71,12 @@ export default class Lumens {
     if (this.dotNavigation) {
       this.dotnav = document.createElement("div")
       this.dotnav.className = "lumens__dot-nav"
-      this.dotnav.style.margin = "0 auto"
+
+      if (!this.dotnavStyling.ownStyle) {
+        this.dotnav.style.margin = "0 auto"
+        this.dotnav.style.textAlign = "center"
+      }
+
       this.dotamount = this.infinite ? Math.ceil((this.slideAmount - this.slidesPerPage * 2) / this.slidesPerPage) : Math.ceil(this.slideAmount / this.slidesPerPage)
       this.track.after(this.dotnav)
       for (let i = 0; i < this.dotamount; i++) {
@@ -107,6 +112,9 @@ export default class Lumens {
     if (this.dotNavigation) {
       let dotIndex = this.infinite ? Math.floor(this.currentPage / this.slidesPerPage) - 1 : Math.floor(this.currentPage / this.slidesPerPage)
       this.dotnav.querySelectorAll("." + this.dotnavStyling.className).forEach((tmp, index) => {
+        if (this.currentPage + this.slidesPerPage == this.slideAmount && !Number.isInteger(this.currentPage / this.slidesPerPage)) {
+          index--
+        }
         tmp.className = index === dotIndex ? this.dotnavStyling.className + " " + this.dotnavStyling.className + "--active" : this.dotnavStyling.className
       })
 
