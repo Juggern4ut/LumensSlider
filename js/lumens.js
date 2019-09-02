@@ -520,7 +520,7 @@ export default class Lumens {
    * @returns {void}
    */
   updateSettings(options) {
-    if (options.slidesPerPage && !Number.isInteger(options.slidesPerPage)) {
+    if (options && !Number.isInteger(options.slidesPerPage)) {
       this.warn(`Option 'slidesPerPage' has to be a whole number. The given ${options.slidesPerPage} was rounded to ${Math.round(options.slidesPerPage)}`)
       if (options.slidesPerPage) {
         options.slidesPerPage = Math.round(options.slidesPerPage)
