@@ -86,7 +86,7 @@ Lumens supports the most commen Browsers which include:
 - Microsoft Internet Explorer (version 9 and above)
 - Samsung Internet
 
-For a detailed list, you can check out this Sheet containing all the tests Lumens went through
+For a detailed list, you can check out [this Sheet](https://docs.google.com/spreadsheets/d/1eUDNPch8Y_K6fcRfYqEpRuqZ_FaKXpu3oJ_yJf77-lw/edit?usp=sharing) containing all the tests Lumens went through
 
 ## Features
 
