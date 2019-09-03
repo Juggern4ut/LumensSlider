@@ -4,7 +4,6 @@ import "./prism.min"
 window.navElements = []
 window.navLinks = []
 window.addEventListener("load", () => {
-  
   window.navElements = document.querySelectorAll(".navigation-scroll")
   window.navLinks = document.querySelectorAll(".navigation__link")
 
@@ -40,7 +39,9 @@ let getCurrentSection = () => {
 }
 
 let initSliders = () => {
-  window.defaultslider = new Lumens(".defaultslider")
+  window.defaultslider = new Lumens(".defaultslider", { startAtPage: 3 })
+
+  window.keepsize = new Lumens(".keepsize", { keepSlideSize: true, margin: 10 })
 
   window.autoplay = new Lumens(".autoplayslider", {
     autoplay: 2500

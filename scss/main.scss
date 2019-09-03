@@ -30,7 +30,7 @@ hr {
 
 .heading-tertiary {
   font-weight: 500;
-  &--margin{
+  &--margin {
     margin-bottom: 1rem;
   }
 }
@@ -50,6 +50,74 @@ hr {
 
   &--narrow {
     width: auto;
+  }
+}
+
+.warning {
+  background-color: #ffeebc;
+  color: #4e4c05;
+  border: 1px solid #797016;
+  border-radius: 3px;
+  padding: 2px 5px;
+  font-family: monospace;
+  display: inline-block;
+  vertical-align: top;
+  line-height: 1.5;
+}
+
+.keepsize {
+  margin-bottom: 1rem;
+  width: calc(100% + 1rem);
+  position: relative;
+  right: 1rem;
+  margin: 0 auto 2rem auto;
+
+  .lumens__slide {
+    height: 15rem;
+    color: #333;
+    background-color: #2b333f;
+    line-height: 15rem;
+    font-size: 5rem;
+
+    &:nth-of-type(1) {
+      width: 200px;
+    }
+
+    &:nth-of-type(2) {
+      width: 100px;
+    }
+
+    &:nth-of-type(3) {
+      width: 300px;
+    }
+
+    &:nth-of-type(4) {
+      width: 250px;
+    }
+
+    &:nth-of-type(5) {
+      width: 350px;
+    }
+
+    &:nth-of-type(6) {
+      width: 150px;
+    }
+
+    svg {
+      height: 13rem;
+      margin-top: 1rem;
+    }
+
+    &:nth-child(odd) {
+      background-color: #fff;
+      a {
+        color: #1a0dab;
+      }
+    }
+
+    a {
+      color: #eee;
+    }
   }
 }
 

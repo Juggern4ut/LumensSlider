@@ -150,6 +150,51 @@ hr {
   .inline-code--narrow {
     width: auto; }
 
+.warning {
+  background-color: #ffeebc;
+  color: #4e4c05;
+  border: 1px solid #797016;
+  border-radius: 3px;
+  padding: 2px 5px;
+  font-family: monospace;
+  display: inline-block;
+  vertical-align: top;
+  line-height: 1.5; }
+
+.keepsize {
+  margin-bottom: 1rem;
+  width: calc(100% + 1rem);
+  position: relative;
+  right: 1rem;
+  margin: 0 auto 2rem auto; }
+  .keepsize .lumens__slide {
+    height: 15rem;
+    color: #333;
+    background-color: #2b333f;
+    line-height: 15rem;
+    font-size: 5rem; }
+    .keepsize .lumens__slide:nth-of-type(1) {
+      width: 200px; }
+    .keepsize .lumens__slide:nth-of-type(2) {
+      width: 100px; }
+    .keepsize .lumens__slide:nth-of-type(3) {
+      width: 300px; }
+    .keepsize .lumens__slide:nth-of-type(4) {
+      width: 250px; }
+    .keepsize .lumens__slide:nth-of-type(5) {
+      width: 350px; }
+    .keepsize .lumens__slide:nth-of-type(6) {
+      width: 150px; }
+    .keepsize .lumens__slide svg {
+      height: 13rem;
+      margin-top: 1rem; }
+    .keepsize .lumens__slide:nth-child(odd) {
+      background-color: #fff; }
+      .keepsize .lumens__slide:nth-child(odd) a {
+        color: #1a0dab; }
+    .keepsize .lumens__slide a {
+      color: #eee; }
+
 .section-header {
   text-align: center;
   padding-top: 4rem;

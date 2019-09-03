@@ -30,12 +30,14 @@ export default class Lumens {
 
     this.slideAmount = this.infinite ? this.slider.children.length + 2 * this.slidesPerPage : this.slider.children.length
 
+    this.createDomElements()
+
     this.calculateWidths()
 
     //Create and fill track
-    this.createAndAddTrack()
-    this.enableTransition()
+    this.setupTrack()
     this.setupSlides()
+
     this.createAndAddDotNavigation()
 
     this.initializeDragging()
@@ -48,18 +50,72 @@ export default class Lumens {
   }
 
   /**
-   * Creates the track element and formats it correctly
+   * Creates the DOM for the Track and all the slides (Widths and styling are not yet set)
    * @returns {void}
    */
-  createAndAddTrack() {
+  createDomElements() {
     this.track = document.createElement("div")
     this.track.className = "lumens__track"
-    this.track.style.width = this.sliderWidth + "px"
-    this.track.style.overflow = "hidden"
-    this.setTransform(this.startAtPage * this.slideWidth * -1)
-    this.xOffset = this.startAtPage * this.slideWidth * -1
     this.currentPage = this.startAtPage
     this.slider.append(this.track)
+
+    var loopLength = this.infinite ? this.slideAmount - 2 * this.slidesPerPage : this.slideAmount
+    for (let i = 0; i < loopLength; i++) {
+      const slide = this.slider.children[0]
+      slide.className += " lumens__slide"
+      this.track.append(slide)
+    }
+
+    if (this.infinite) {
+      for (let i = 0; i < this.slidesPerPage; i++) {
+        var newNode = this.track.children[this.track.children.length - 1 - i].cloneNode(true)
+        newNode.className += " lumens__slide--clone"
+        this.track.prepend(newNode)
+      }
+
+      for (let i = 0; i < this.slidesPerPage; i++) {
+        var newNode = this.track.children[i + this.slidesPerPage].cloneNode(true)
+        newNode.className += " lumens__slide--clone"
+        this.track.append(newNode)
+      }
+    }
+
+    this.slides = this.track.children
+    this.slideAmount = this.track.children.length
+  }
+
+  /**
+   * Sets the Track-Element up
+   * @returns {void}
+   */
+  setupTrack() {
+    this.track.style.width = this.sliderWidth + "px"
+    this.track.style.overflow = "hidden"
+    this.currentPage = this.startAtPage
+    this.disableTransition()
+    if (this.keepSlideSize) {
+      this.xOffset = 0
+      for (let i = 0; i < this.startAtPage; i++) {
+        const slide = this.slides[i]
+        this.xOffset += slide.offsetWidth + this.margin * 2
+      }
+    } else {
+      this.xOffset = this.startAtPage * this.slideWidth * -1
+    }
+    this.setTransform(this.xOffset)
+  }
+
+  /**
+   * Will configure the initial state of the slides
+   * @returns {void}
+   */
+  setupSlides() {
+    for (let i = 0; i < this.slides.length; i++) {
+      const slide = this.slides[i]
+      slide.style.width = this.slideWidth - this.margin * 2 + "px"
+      slide.style.margin = "0 " + this.margin + "px"
+      slide.style.float = "left"
+    }
   }
 
   /**
@@ -228,11 +284,13 @@ export default class Lumens {
       this.enableTransition()
       this.xOffset += this.xDragDelta
 
-      if (this.xDragDelta < this.slideWidth * -1 || this.xDragDelta > this.slideWidth) {
+      console.log(this.xDragDelta)
+
+      if ((this.xDragDelta < this.slideWidth * -1 || this.xDragDelta > this.slideWidth) && !this.keepSlideSize) {
         this.gotoPage()
-      } else if (this.xDragDelta <= this.threshold * -1 && this.xOffset > (this.sliderWidth - this.slidesPerPage * this.slideWidth) * -1) {
+      } else if (this.xDragDelta <= this.threshold * -1 && this.xOffset * -1 < this.sliderWidth - this.sliderVisibleWidth && this.xDragDelta > -200) {
         this.gotoNext()
-      } else if (this.xDragDelta >= this.threshold && this.xOffset < 0) {
+      } else if (this.xDragDelta >= this.threshold && this.xOffset < 0 && this.xDragDelta < 200) {
         this.gotoPrev()
       } else {
         this.gotoPage()
@@ -283,41 +341,6 @@ export default class Lumens {
   }
 
   /**
-   * Will configure the initial state of the slides
-   * and place them inside the track-element.
-   * @returns {void}
-   */
-  setupSlides() {
-    var loopLength = this.infinite ? this.slideAmount - 2 * this.slidesPerPage : this.slideAmount
-    for (let i = 0; i < loopLength; i++) {
-      const slide = this.slider.children[0]
-      slide.className += " lumens__slide"
-      slide.style.width = this.slideWidth - this.margin * 2 + "px"
-      slide.style.margin = "0 " + this.margin + "px"
-      slide.style.float = "left"
-      this.track.append(slide)
-    }
-
-    //CLONES
-    if (this.infinite) {
-      for (let i = 0; i < this.slidesPerPage; i++) {
-        var newNode = this.track.children[this.track.children.length - 1 - i].cloneNode(true)
-        newNode.className += " lumens__slide--clone"
-        this.track.prepend(newNode)
-      }
-
-      for (let i = 0; i < this.slidesPerPage; i++) {
-        var newNode = this.track.children[i + this.slidesPerPage].cloneNode(true)
-        newNode.className += " lumens__slide--clone"
-        this.track.append(newNode)
-      }
-    }
-
-    this.slides = this.track.children
-    this.slideAmount = this.track.children.length
-  }
-
-  /**
    * Scrolls the slider to a certain page. If page is undefined
    * it will scroll to the nearest page of the current offset.
    * (This is what happens when you release the mouse button while dragging)
@@ -334,7 +357,18 @@ export default class Lumens {
 
     page = page > this.slideAmount - this.slidesPerPage ? this.slideAmount - this.slidesPerPage : page
     page = page < 0 ? 0 : page
-    let offset = page * this.slideWidth * -1
+
+    let offset = 0
+    if (this.keepSlideSize) {
+      for (let i = 0; i < page; i++) {
+        offset += this.slides[i].offsetWidth + this.margin * 2
+      }
+
+      offset = offset * -1
+    } else {
+      offset = page * (this.slides[page].offsetWidth + this.margin * 2) * -1
+    }
+
     this.setTransform(offset)
     this.xOffset = offset
     this.currentPage = page
@@ -440,8 +474,31 @@ export default class Lumens {
    * @returns {Number} The current page the slider is on
    */
   getCurrentPage() {
-    if (this.xOffset > 0) {
+    if (this.xOffset > 0 && !this.keepSlideSize) {
       return 0
+    }
+
+    if (this.keepSlideSize) {
+      if (this.xOffset * -1 + this.sliderVisibleWidth >= this.sliderWidth) {
+        this.xOffset = (this.sliderWidth - this.sliderVisibleWidth - 10) * -1
+      }
+
+      let closestDiff = 0
+      let closestSlide = 0
+      for (let i = 0; i < this.slides.length; i++) {
+        const diff = this.slides[i].offsetLeft + this.xOffset
+        if (closestDiff === 0) {
+          closestDiff = diff
+          closestSlide = i
+        } else if (diff > 0 && diff <= Math.abs(closestDiff)) {
+          closestDiff = diff
+          closestSlide = i
+        } else if (diff < 0 && -diff < Math.abs(closestDiff)) {
+          closestDiff = diff
+          closestSlide = i
+        }
+      }
+      return closestSlide
     }
 
     return Math.abs(Math.round(this.xOffset / this.slideWidth))
@@ -468,6 +525,8 @@ export default class Lumens {
     this.noOuterMargin = false
     this.startAtPage = 0
     this.infinite = false
+    this.keepSlideSize = false
+    this.dragFree = false
 
     this.afterChangeCallback = () => {}
     this.beforeChangeCallback = () => {}
@@ -550,9 +609,17 @@ export default class Lumens {
    */
   calculateWidths() {
     this.sliderPadding = parseInt(window.getComputedStyle(this.slider, null).getPropertyValue("padding-left"))
-    this.sliderVisibleWidth = this.noOuterMargin ? this.slider.offsetWidth + 2 * this.margin - this.sliderPadding * 2 : this.slider.offsetWidth - this.sliderPadding * 2
-    this.slideWidth = this.sliderVisibleWidth / this.slidesPerPage
-    this.sliderWidth = this.slideWidth * this.slideAmount
+    this.sliderVisibleWidth = this.slider.offsetWidth - this.sliderPadding * 2
+
+    if (this.keepSlideSize) {
+      this.sliderWidth = 0
+      Array.from(this.slides).forEach(slide => {
+        this.sliderWidth += slide.offsetWidth + this.margin * 2
+      })
+    } else {
+      this.slideWidth = this.sliderVisibleWidth / this.slidesPerPage
+      this.sliderWidth = this.slideWidth * this.slideAmount
+    }
   }
 
   /**
