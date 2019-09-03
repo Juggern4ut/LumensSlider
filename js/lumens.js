@@ -287,9 +287,9 @@ export default class Lumens {
       if (!this.freeScroll) {
         if ((this.xDragDelta < this.slideWidth * -1 || this.xDragDelta > this.slideWidth) && !this.keepSlideSize) {
           this.gotoPage()
-        } else if (this.xDragDelta <= this.threshold * -1 && this.xOffset * -1 < this.sliderWidth - this.sliderVisibleWidth && this.xDragDelta > -200) {
+        } else if (this.xDragDelta <= this.threshold * -1 && this.xOffset * -1 < this.sliderWidth - this.sliderVisibleWidth) {
           this.gotoNext()
-        } else if (this.xDragDelta >= this.threshold && this.xOffset < 0 && this.xDragDelta < 200) {
+        } else if (this.xDragDelta >= this.threshold && this.xOffset < 0) {
           this.gotoPrev()
         } else {
           this.gotoPage()
