@@ -7,14 +7,6 @@ window.addEventListener("load", () => {
   window.navElements = document.querySelectorAll(".navigation-scroll")
   window.navLinks = document.querySelectorAll(".navigation__link")
 
-  for (let i = 0; i < window.navLinks.length; i++) {
-    const nav = window.navLinks[i]
-    nav.addEventListener("click", () => {
-      var puffer = window.innerWidth > 850 ? 20 : 20 + document.querySelector(".navigation").clientHeight
-      window.scrollTo(0, window.navElements[i].offsetTop - puffer)
-    })
-  }
-
   getCurrentSection()
   initSliders()
 })
