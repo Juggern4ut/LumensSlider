@@ -47,6 +47,8 @@ let initSliders = () => {
     autoplay: 2500
   })
 
+  window.freescroll = new Lumens(".freescroll", { keepSlideSize: true, freeScroll: true })
+
   window.preventclick = new Lumens(".productslider", {
     preventClickDistance: 50
   })

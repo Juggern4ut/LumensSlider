@@ -148,7 +148,8 @@ hr {
   overflow-x: auto;
   white-space: nowrap; }
   .inline-code--narrow {
-    width: auto; }
+    width: auto;
+    vertical-align: middle; }
 
 .warning {
   background-color: #ffeebc;
@@ -160,6 +161,9 @@ hr {
   display: inline-block;
   vertical-align: top;
   line-height: 1.5; }
+
+.freescroll {
+  margin-bottom: 1rem; }
 
 .keepsize {
   margin-bottom: 1rem;

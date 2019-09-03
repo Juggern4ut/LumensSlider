@@ -284,16 +284,24 @@ export default class Lumens {
       this.enableTransition()
       this.xOffset += this.xDragDelta
 
-      console.log(this.xDragDelta)
-
-      if ((this.xDragDelta < this.slideWidth * -1 || this.xDragDelta > this.slideWidth) && !this.keepSlideSize) {
-        this.gotoPage()
-      } else if (this.xDragDelta <= this.threshold * -1 && this.xOffset * -1 < this.sliderWidth - this.sliderVisibleWidth && this.xDragDelta > -200) {
-        this.gotoNext()
-      } else if (this.xDragDelta >= this.threshold && this.xOffset < 0 && this.xDragDelta < 200) {
-        this.gotoPrev()
+      if (!this.freeScroll) {
+        if ((this.xDragDelta < this.slideWidth * -1 || this.xDragDelta > this.slideWidth) && !this.keepSlideSize) {
+          this.gotoPage()
+        } else if (this.xDragDelta <= this.threshold * -1 && this.xOffset * -1 < this.sliderWidth - this.sliderVisibleWidth && this.xDragDelta > -200) {
+          this.gotoNext()
+        } else if (this.xDragDelta >= this.threshold && this.xOffset < 0 && this.xDragDelta < 200) {
+          this.gotoPrev()
+        } else {
+          this.gotoPage()
+        }
       } else {
-        this.gotoPage()
+        if (this.xOffset > 0) {
+          this.xOffset = 0
+          this.setTransform(this.xOffset)
+        } else if (this.xOffset * -1 > this.sliderWidth - this.sliderVisibleWidth) {
+          this.xOffset = (this.sliderWidth - this.sliderVisibleWidth) * -1
+          this.setTransform(this.xOffset)
+        }
       }
 
       this.initAutoplay()
@@ -526,7 +534,7 @@ export default class Lumens {
     this.startAtPage = 0
     this.infinite = false
     this.keepSlideSize = false
-    this.dragFree = false
+    this.freeScroll = false
 
     this.afterChangeCallback = () => {}
     this.beforeChangeCallback = () => {}

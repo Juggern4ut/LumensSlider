@@ -50,6 +50,7 @@ hr {
 
   &--narrow {
     width: auto;
+    vertical-align: middle;
   }
 }
 
@@ -63,6 +64,10 @@ hr {
   display: inline-block;
   vertical-align: top;
   line-height: 1.5;
+}
+
+.freescroll {
+  margin-bottom: 1rem;
 }
 
 .keepsize {

@@ -184,6 +184,9 @@
 
 		<code class="inline-code inline-code--narrow">keepSlideSize (Boolean = false)</code>&nbsp;<span title="Warning: This option is still in testing/development. Test carefully before using in production" class="warning">BETA</span>
 		<p>Will keep the CSS-defined width of the slide instead of calculating it based on the sliderwidth and the slidesPerPage-option</p>
+		
+		<code class="inline-code inline-code--narrow">freeScroll (Boolean = false)</code>&nbsp;<span title="Warning: This option is still in testing/development. Test carefully before using in production" class="warning">BETA</span>
+		<p>With this set to true, Lumens will no longer snap to the closest slide when the dragging stops. (Exception if the user scrolls over the ends of the slideshow)</p>
 	
 	</section>
 	
@@ -406,7 +409,7 @@ document.getElementById("prev").addEventListener("click", () => {
 		</article>
 	</section>
 
-<!-- Arrow Keys -->
+<!-- Keep Slidewidth -->
 	<section class="container">
 		<article>
 			<h2 class="heading-secondary heading-secondary--no-margin-top">Variable slidewidth</h2>
@@ -422,6 +425,23 @@ document.getElementById("prev").addEventListener("click", () => {
 
 <pre class="language-js"><code>var keepsize = new Lumens(".keepsize", {
 	keepSlideSize: true
+})</code></pre>
+
+		</article>
+	</section>
+
+<!-- Scroll Freely -->
+	<section class="container">
+		<article>
+			<h2 class="heading-secondary heading-secondary--no-margin-top">Free Scroll</h2>
+			<p>Lumens can also be used as a horizontal srollbar, just use the options <span class="inline-code inline-code--narrow">freeScroll</span> and <span class="inline-code inline-code--narrow">keepSlideSize</span> combined.</p>
+			<div class="freescroll">
+				<img src="front/timeline.jpg">
+			</div>
+
+<pre class="language-js"><code>var freescroll = new Lumens(".freescroll", {
+	keepSlideSize: true,
+	freeScroll: true
 })</code></pre>
 
 		</article>
