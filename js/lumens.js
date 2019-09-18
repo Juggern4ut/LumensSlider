@@ -255,6 +255,7 @@ export default class Lumens {
    */
   initializeDragging() {
     var mouseDown = e => {
+      this.startTime = Date.now()
       if (!this.draggable) {
         this.warn("Dragging is disabled")
         return false
@@ -284,6 +285,8 @@ export default class Lumens {
       this.enableTransition()
       this.xOffset += this.xDragDelta
 
+      this.scrollForce = 300 - (Date.now() - this.startTime)
+
       if (!this.freeScroll) {
         if ((this.xDragDelta < this.slideWidth * -1 || this.xDragDelta > this.slideWidth) && !this.keepSlideSize) {
           this.gotoPage()
@@ -295,6 +298,16 @@ export default class Lumens {
           this.gotoPage()
         }
       } else {
+
+        if (this.scrollForce > 0 && Math.abs(this.xDragDelta > this.threshold)) {
+          if (this.xDragDelta < 0) {
+            this.xOffset -= this.scrollForce
+          } else {
+            this.xOffset += this.scrollForce
+          }
+          this.setTransform(this.xOffset)
+        }
+
         if (this.xOffset > 0) {
           this.xOffset = 0
           this.setTransform(this.xOffset)
@@ -616,8 +629,11 @@ export default class Lumens {
    * @returns {void}
    */
   calculateWidths() {
-    this.sliderPadding = parseInt(window.getComputedStyle(this.slider, null).getPropertyValue("padding-left"))
-    this.sliderVisibleWidth = this.slider.offsetWidth - this.sliderPadding * 2
+    this.sliderPaddingLeft = parseInt(window.getComputedStyle(this.slider, null).getPropertyValue("padding-left"))
+    this.sliderPaddingRight = parseInt(window.getComputedStyle(this.slider, null).getPropertyValue("padding-right"))
+    this.sliderBorderLeft = parseInt(window.getComputedStyle(this.slider, null).getPropertyValue("border-left-width"))
+    this.sliderBorderRight = parseInt(window.getComputedStyle(this.slider, null).getPropertyValue("border-right-width"))
+    this.sliderVisibleWidth = this.slider.offsetWidth - (this.sliderPaddingLeft + this.sliderPaddingRight + this.sliderBorderLeft + this.sliderBorderRight)
 
     if (this.keepSlideSize) {
       this.sliderWidth = 0
