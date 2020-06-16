@@ -361,6 +361,12 @@ export default class Lumens {
     this.track.style.transform = `translate(${value}px, 0)`
   }
 
+  getExactSlideWidth(slide){
+    const compStyle = window.getComputedStyle(slide, null);
+    const width = parseFloat(compStyle.getPropertyValue("width"));
+    return width;
+  }
+
   /**
    * Scrolls the slider to a certain page. If page is undefined
    * it will scroll to the nearest page of the current offset.
@@ -387,7 +393,7 @@ export default class Lumens {
 
       offset = offset * -1
     } else {
-      offset = page * (this.slides[page].offsetWidth + this.margin * 2) * -1
+      offset = page * (this.getExactSlideWidth(this.slides[page]) + this.margin * 2) * -1
     }
 
     this.setTransform(offset)
