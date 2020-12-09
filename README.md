@@ -172,7 +172,7 @@ If this is set to true, the slideshow will loop and start again from the beginni
 
 Sounds all fine and dandy, but I'm sure you want to look at some examples first, to see if Lumens is the right thing for you. So here you go:
 
-[Demo Page](https://juggern4ut.github.io/lumens/)
+[Demo Page](https://juggern4ut.github.io/LumensSlider/)
 
 ## Authors
 
