@@ -31,6 +31,6 @@
   },
   "dependencies": {
     "@babel/runtime-corejs3": "^7.4.5",
-    "node-sass": "^4.11.0"
+    "node-sass": "^7.0.0"
   }
 }
